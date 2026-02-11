@@ -1,0 +1,6 @@
+Does being polite or commanding to large language models affect their accuracy?
+Published studies disagree: some report that politeness helps, others find rudeness more effective, and yet others observe no significant effect.
+We conduct a controlled meta-experiment to reconcile these contradictions, testing seven prompt tone conditions---ranging from very polite to very rude, plus positive and negative emotional stimuli---across three current-generation models (\gptfour, \claudesonnet, and \geminiflash) on \mmlu (STEM and Humanities) and \truthfulqa, totaling 189 experimental runs and approximately 37,800 API calls.
+We find that tone effects are \emph{strongly model-dependent}: \gptfour and \geminiflash are robust to tone ($\pm$1--3 percentage points), while \claudesonnet exhibits large sensitivity where commanding prompts improve STEM accuracy by up to 12.2\pp over neutral and positive emotional suffixes catastrophically reduce measured performance by 28.3\pp due to instruction-following disruption.
+This model heterogeneity is the primary explanation for why prior studies disagree: they tested different models under different conditions.
+Our results suggest that for most modern LLMs, prompt clarity matters more than tone, but practitioners should be aware that specific model--tone interactions can produce substantial effects.

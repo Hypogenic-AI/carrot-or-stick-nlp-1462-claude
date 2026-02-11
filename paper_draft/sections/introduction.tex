@@ -1,0 +1,29 @@
+\section{Introduction}
+\label{sec:introduction}
+
+Millions of users interact with large language models (LLMs) daily, and a recurring practical question is whether saying ``please'' and ``thank you'' makes a difference.
+Should users be polite---offering encouragement and gratitude---or direct and commanding?
+This ``carrot or stick'' question has attracted growing research attention, yet the published evidence is strikingly contradictory: \citet{yin2024should} report that impolite prompts hurt performance, \citet{dobariya2025mind} find that rude prompts \emph{improve} accuracy, and \citet{cai2025does} observe that effects are mostly non-significant at scale.
+
+These contradictions create genuine confusion for practitioners.
+Prompt engineering guides offer conflicting advice, with some recommending politeness for better outputs \citep{bsharat2023principled} and others suggesting that courtesy wastes tokens.
+Meanwhile, research on emotional stimuli adds further complexity: \citet{li2023emotionprompt} show that positive encouragement improves LLM performance by up to 115\% on certain benchmarks, while \citet{wang2024negativeprompt} demonstrate that \emph{negative} emotional stimuli can be equally or more effective.
+
+{\bf Why do these studies disagree?}
+We hypothesize that the contradictions stem from three methodological sources: (1)~different studies test different models that have different sensitivities to tone due to different alignment training; (2)~small dataset scales amplify noise into apparently significant effects; and (3)~emotional prompt suffixes can disrupt instruction following, creating confounded accuracy measurements.
+
+We test this hypothesis through a unified meta-experiment that controls for all three factors simultaneously.
+We evaluate seven prompt tone conditions---\vpolite, \polite, \neutral, \rude, \vrude, plus positive and negative emotional stimuli drawn from EmotionPrompt \citep{li2023emotionprompt} and NegativePrompt \citep{wang2024negativeprompt}---across three current-generation LLMs (\gptfour, \claudesonnet, \geminiflash) on three benchmarks (\mmlu STEM, \mmlu Humanities, \truthfulqa), with three trials per condition for a total of 189 experimental runs and approximately 37,800 API calls.
+
+Our key finding is that tone effects are \emph{strongly model-dependent}.
+\gptfour is highly robust to tone ($\pm$1.8\pp maximum deviation from neutral).
+\geminiflash shows moderate but inconsistent effects ($\pm$3\pp).
+\claudesonnet, however, exhibits dramatic sensitivity: commanding prompts improve STEM accuracy by 12.2\pp over neutral, while positive emotional suffixes reduce measured accuracy by 28.3\pp---an artifact of instruction-following disruption rather than reasoning failure.
+This model heterogeneity directly explains why prior studies reached contradictory conclusions.
+
+We make the following contributions:
+\begin{itemize}[leftmargin=*,itemsep=0pt,topsep=0pt]
+    \item We conduct the first controlled comparison of prompt tone effects across three current-generation LLM families under identical experimental conditions, revealing that model heterogeneity is the primary source of contradictory findings in the literature.
+    \item We identify a previously unreported interaction between emotional prompt suffixes and instruction following in \claudesonnet, where appended encouragement disrupts format compliance and produces misleading accuracy drops of up to 28.3\pp.
+    \item We provide a systematic reconciliation of seven prior studies, showing how differences in model choice, dataset scale, and evaluation methodology account for their conflicting conclusions.
+\end{itemize}

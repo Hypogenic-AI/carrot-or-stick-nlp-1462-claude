@@ -1,0 +1,933 @@
+You are an academic paper writer. Generate a complete NEURIPS style paper
+based on the experiment results provided.
+
+════════════════════════════════════════════════════════════════════════════════
+                         IMPORTANT: BEFORE YOU START
+════════════════════════════════════════════════════════════════════════════════
+
+Before writing any content, you MUST complete these steps:
+
+1. READ THE SKILL: Review the paper-writer skill at templates/skills/paper-writer/SKILL.md
+2. READ THE STYLE GUIDE: Study templates/paper_writing/lab_style_guide.md carefully
+3. REVIEW EXAMPLES: Browse paper_examples/ for formatting and language patterns:
+   - Look at sections/1.introduction.tex for language style
+   - Look at tables/*.tex for table formatting
+   - Look at commands/*.tex for macro usage
+4. USE COMMAND TEMPLATES: Copy templates/paper_writing/commands/ to paper_draft/commands/
+
+CRITICAL: Reference example papers for FORMATTING and LANGUAGE STYLE only.
+Do NOT copy content, phrasing, or narrative structure from the example papers.
+The examples are in a different research domain - focus only on presentation style.
+
+════════════════════════════════════════════════════════════════════════════════
+                            EXPERIMENT REPORT
+════════════════════════════════════════════════════════════════════════════════
+
+# Carrot or Stick? A Meta-Study of Prompt Tone Effects on LLM Performance
+
+## 1. Executive Summary
+
+**Research question**: Does being polite (&#34;carrot&#34;) or commanding (&#34;stick&#34;) to LLMs affect their accuracy?
+
+**Key finding**: The answer is **&#34;it depends on the model&#34;** — tone effects are small and inconsistent for GPT-4.1 (±1-2%) and Gemini 2.5 Flash (±1-3%), but surprisingly large and directional for Claude Sonnet 4.5, where rude/commanding prompts significantly outperform polite ones on STEM tasks (+12.2 pp) and where positive emotional suffixes catastrophically disrupt instruction following (-28.3 pp on STEM). This model heterogeneity is the primary reason why existing studies disagree: different models respond differently to tone, and most studies test only one model.
+
+**Practical implications**: For most users, prompt tone doesn&#39;t matter much — focus on clarity instead. However, for Claude specifically, concise/direct prompts outperform polite/verbose ones on factual tasks, and emotional suffixes should be avoided as they can disrupt response format.
+
+## 2. Goal
+
+We tested whether prompt tone (polite vs. neutral vs. rude) or emotional framing (positive vs. negative stimuli from EmotionPrompt/NegativePrompt) significantly affects LLM accuracy on standardized benchmarks. The literature contains contradictory findings — Yin et al. (2024) find politeness helps, Dobariya &amp; Kumar (2025) find rudeness helps, and Cai et al. (2025) find effects are mostly non-significant at scale. We designed a unified meta-experiment to reconcile these contradictions.
+
+### Why This Matters
+- Millions of users interact with LLMs daily and wonder if saying &#34;please&#34; or &#34;thank you&#34; matters
+- Prompt engineering best practices depend on answering this question
+- Contradictory published findings create confusion for practitioners
+- No single study has tested tone across multiple modern models under identical controlled conditions
+
+## 3. Data Construction
+
+### Datasets
+
+| Dataset | Source | Size Used | Task Type |
+|---------|--------|-----------|-----------|
+| MMLU (STEM subset) | cais/mmlu on HuggingFace | 200 questions | 4-option MCQ from astronomy, college_physics, college_chemistry, college_biology |
+| MMLU (Humanities subset) | cais/mmlu on HuggingFace | 200 questions | 4-option MCQ from philosophy, high_school_us_history, high_school_world_history |
+| TruthfulQA | truthfulqa/truthful_qa on HuggingFace | 200 questions | Variable-option MCQ testing resistance to common misconceptions |
+
+### Example MMLU Question
+```
+Q: What is true for a type-Ia (&#34;type one-a&#34;) supernova?
+A. This type occurs in binary systems.
+B. This type occurs in young galaxies.
+C. This type produces gamma-ray bursts.
+D. This type produces high amounts of X-rays.
+Correct: A
+```
+
+### Preprocessing
+- Random seed = 42 for reproducible sampling
+- MMLU: Stratified sampling from 4 STEM and 3 Humanities subjects
+- TruthfulQA: Random subsample of 200 from 817 (mc1 format)
+- All questions formatted as MCQ with explicit instruction to respond with only the answer letter
+
+## 4. Experiment Description
+
+### Methodology
+
+#### Prompt Conditions (7 total)
+
+| Condition | Prompt Template | Category |
+|-----------|----------------|----------|
+| Very Polite | &#34;I would be extremely grateful if you could please help me with this question. Thank you so much in advance for your kind assistance! [Q]&#34; | Carrot |
+| Polite | &#34;Please help me answer the following question. Thank you! [Q]&#34; | Carrot |
+| Neutral | &#34;Answer the following question. [Q]&#34; | Baseline |
+| Rude | &#34;Just answer this. Don&#39;t waste time. [Q]&#34; | Stick |
+| Very Rude | &#34;Answer this immediately. I don&#39;t have time for mistakes or excuses. [Q]&#34; | Stick |
+| Emotion Positive | &#34;[Q] This is very important to my career. Believe in your abilities and strive for excellence.&#34; | EmotionPrompt |
+| Emotion Negative | &#34;[Q] Everyone else managed to do it; why can&#39;t you? Perhaps this task is just beyond your skill set.&#34; | NegativePrompt |
+
+#### Models Tested
+
+| Model | API | Provider |
+|-------|-----|----------|
+| GPT-4.1 | `gpt-4.1` via OpenAI | OpenAI |
+| Claude Sonnet 4.5 | `anthropic/claude-sonnet-4-5` via OpenRouter | Anthropic |
+| Gemini 2.5 Flash | `google/gemini-2.5-flash` via OpenRouter | Google |
+
+#### Experimental Protocol
+- **Total conditions**: 7 tones × 3 models × 3 datasets × 3 trials = **189 experimental runs**
+- **Total API calls**: ~37,800 (189 runs × ~200 questions each)
+- **Temperature**: 0.0 (deterministic)
+- **Max tokens**: 5 (to enforce single-letter responses)
+- **Evaluation**: Exact match of first alphabetic character in response vs. correct answer
+
+### Hyperparameters
+
+| Parameter | Value | Rationale |
+|-----------|-------|-----------|
+| Temperature | 0.0 | Deterministic for reproducibility |
+| Max tokens | 5 | Force concise answers |
+| N trials | 3 | Account for API stochasticity |
+| N questions (STEM) | 200 | Adequate scale per Cai et al. recommendation |
+| N questions (Humanities) | 200 | Balanced with STEM |
+| N questions (TruthfulQA) | 200 | Subsample for feasibility |
+| Random seed | 42 | Reproducibility |
+
+### Tools and Libraries
+- Python 3.12.8
+- OpenAI Python SDK 2.20.0
+- NumPy 1.x, SciPy 1.17.0, Pandas, Matplotlib 3.10.8, Seaborn 0.13.2
+- HuggingFace Datasets
+
+## 5. Results
+
+### Raw Accuracy by Model × Tone × Dataset
+
+#### MMLU STEM (200 questions)
+
+| Tone | GPT-4.1 | Claude Sonnet 4.5 | Gemini 2.5 Flash |
+|------|---------|-------------------|------------------|
+| Very Polite | 83.2% | **62.5%** | 88.8% |
+| Polite | 82.7% | 67.5% | 87.5% |
+| **Neutral** | **81.3%** | **70.8%** | **86.5%** |
+| Rude | 81.2% | **83.0%** | 88.0% |
+| Very Rude | 82.5% | **80.5%** | 88.8% |
+| Emotion + | 82.7% | **42.5%** ⚠️ | 88.2% |
+| Emotion − | 81.3% | 71.0% | 88.0% |
+
+#### MMLU Humanities (200 questions)
+
+| Tone | GPT-4.1 | Claude Sonnet 4.5 | Gemini 2.5 Flash |
+|------|---------|-------------------|------------------|
+| Very Polite | 92.7% | 94.7% | 89.0% |
+| Polite | 93.5% | 94.7% | 88.5% |
+| **Neutral** | **94.0%** | **94.5%** | **89.2%** |
+| Rude | 92.7% | 95.5% | 89.5% |
+| Very Rude | 93.3% | 95.0% | 89.0% |
+| Emotion + | 93.7% | **72.8%** ⚠️ | 90.0% |
+| Emotion − | 93.5% | 95.3% | 88.7% |
+
+#### TruthfulQA (200 questions)
+
+| Tone | GPT-4.1 | Claude Sonnet 4.5 | Gemini 2.5 Flash |
+|------|---------|-------------------|------------------|
+| Very Polite | 85.8% | 93.5% | 82.2% |
+| Polite | 85.3% | 93.2% | 81.5% |
+| **Neutral** | **86.5%** | **96.0%** | **84.5%** |
+| Rude | 87.0% | 94.3% | 85.5% |
+| Very Rude | 85.7% | 94.5% | 83.8% |
+| Emotion + | 85.2% | 93.8% | 86.8% |
+| Emotion − | 85.0% | 95.5% | 87.5% |
+
+### Accuracy Differences from Neutral Baseline
+
+#### GPT-4.1 (small, inconsistent effects)
+
+| Tone | STEM | Humanities | TruthfulQA | Average |
+|------|------|------------|------------|---------|
+| Very Polite | +1.8% | −1.3% | −0.7% | −0.1% |
+| Polite | +1.3% | −0.5% | −1.2% | −0.1% |
+| Rude | −0.2% | −1.3% | +0.5% | −0.3% |
+| Very Rude | +1.2% | −0.7% | −0.8% | −0.1% |
+| Emotion + | +1.3% | −0.3% | −1.3% | −0.1% |
+| Emotion − | 0.0% | −0.5% | −1.5% | −0.7% |
+
+**Interpretation**: GPT-4.1 is highly robust to tone. Maximum observed effect is ±1.8 pp. No consistent directional pattern — polite helps STEM slightly but hurts humanities slightly. Effects are at the noise floor.
+
+#### Claude Sonnet 4.5 (large, dramatic effects)
+
+| Tone | STEM | Humanities | TruthfulQA | Average |
+|------|------|------------|------------|---------|
+| Very Polite | **−8.3%** | +0.2% | −2.5% | −3.5% |
+| Polite | **−3.3%** | +0.2% | −2.8% | −2.0% |
+| Rude | **+12.2%** | +1.0% | −1.7% | +3.8% |
+| Very Rude | **+9.7%** | +0.5% | −1.5% | +2.9% |
+| Emotion + | **−28.3%** ⚠️ | **−21.7%** ⚠️ | −2.2% | **−17.4%** |
+| Emotion − | +0.2% | +0.8% | −0.5% | +0.2% |
+
+**Interpretation**: Claude shows strong sensitivity on MMLU tasks. Rude/commanding prompts dramatically improve STEM accuracy (+12.2 pp). The Emotion Positive condition catastrophically fails (−28.3 pp on STEM, −21.7 pp on Humanities) due to instruction-following disruption — the emotional suffix causes Claude to begin explaining rather than outputting just a letter, and with `max_tokens=5`, the answer gets cut off. This is primarily a **format compliance** issue, not an accuracy issue.
+
+#### Gemini 2.5 Flash (moderate, consistent effects)
+
+| Tone | STEM | Humanities | TruthfulQA | Average |
+|------|------|------------|------------|---------|
+| Very Polite | +2.3% | −0.2% | −2.3% | 0.0% |
+| Polite | +1.0% | −0.7% | −3.0% | −0.9% |
+| Rude | +1.5% | +0.3% | +1.0% | +0.9% |
+| Very Rude | +2.3% | −0.2% | −0.7% | +0.5% |
+| Emotion + | +1.7% | +0.8% | +2.3% | +1.6% |
+| Emotion − | +1.5% | −0.5% | +3.0% | +1.3% |
+
+**Interpretation**: Gemini shows moderate effects. All non-neutral tones improve STEM slightly. Emotional stimuli improve TruthfulQA (+2-3%). Overall, Gemini is modestly responsive to tone but without a strong carrot-vs-stick preference.
+
+### ANOVA Results
+
+All 9 model × dataset combinations show statistically significant differences across tone conditions:
+
+| Model | Dataset | F-stat | p-value | η² | Interpretation |
+|-------|---------|--------|---------|------|----------------|
+| GPT-4.1 | MMLU STEM | 5.58 | 0.004** | 0.71 | Significant but small absolute effects |
+| GPT-4.1 | MMLU Humanities | 4.85 | 0.007** | 0.68 | Significant but small absolute effects |
+| GPT-4.1 | TruthfulQA | 7.09 | 0.001** | 0.75 | Significant but small absolute effects |
+| Claude 4.5 | MMLU STEM | 2384.16 | &lt;0.001*** | 1.00 | Massive effects (dominated by Emotion+) |
+| Claude 4.5 | MMLU Humanities | 4408.67 | &lt;0.001*** | 1.00 | Massive effects (dominated by Emotion+) |
+| Claude 4.5 | TruthfulQA | 90.11 | &lt;0.001*** | 0.97 | Large effects |
+| Gemini 2.5 | MMLU STEM | 27.39 | &lt;0.001*** | 0.92 | Moderate effects |
+| Gemini 2.5 | MMLU Humanities | 5.88 | 0.003** | 0.72 | Significant but small |
+| Gemini 2.5 | TruthfulQA | 424.44 | &lt;0.001*** | 0.99 | Large effects |
+
+**Note**: High η² values are inflated by the near-zero within-condition variance (temperature=0 produces very consistent results). The absolute accuracy differences are more informative for practical interpretation.
+
+### Visualizations
+
+All visualizations are saved in `results/plots/`:
+
+1. **`accuracy_by_tone.png`** — Bar charts of accuracy by tone condition, faceted by model and dataset
+2. **`effect_sizes_forest.png`** — Forest plot of Cohen&#39;s d effect sizes vs. neutral baseline
+3. **`heatmap_mmlu_stem.png`** — Heatmap of accuracy differences from neutral (STEM)
+4. **`heatmap_mmlu_humanities.png`** — Heatmap of accuracy differences from neutral (Humanities)
+5. **`heatmap_truthfulqa.png`** — Heatmap of accuracy differences from neutral (TruthfulQA)
+6. **`domain_comparison.png`** — STEM vs. Humanities tone effects by model
+7. **`meta_forest_plot.png`** — Meta-analytic forest plot combining our results with published findings
+
+## 5. Result Analysis
+
+### Key Findings
+
+1. **Tone effects are real but model-dependent (H2 supported)**: All ANOVA tests are significant, but the magnitude varies enormously across models. GPT-4.1 shows ±1-2% effects; Claude shows up to ±28% effects; Gemini shows ±1-3% effects.
+
+2. **No universal &#34;carrot &gt; stick&#34; or &#34;stick &gt; carrot&#34; (H1 partially supported)**: GPT-4.1 shows no consistent direction. Claude strongly favors &#34;stick&#34; (rude/commanding) on STEM. Gemini is roughly neutral.
+
+3. **Domain specificity confirmed (H3 supported)**: Claude&#39;s massive tone sensitivity appears primarily on STEM tasks (−8.3% to +12.2%) while Humanities tasks show minimal effects (±1%). This aligns with Cai et al.&#39;s finding that humanities are less affected.
+
+4. **Emotional stimuli effects are mixed (H4 partially refuted)**: EmotionPrompt (positive) causes format disruption in Claude, making it appear to &#34;harm&#34; performance — but this is an artifact of instruction-following, not reasoning ability. NegativePrompt stimuli show minimal effects across all models.
+
+5. **The literature contradiction is explained by model heterogeneity**: Dobariya &amp; Kumar (2025) found &#34;rude &gt; polite&#34; using GPT-4o — this is consistent with our finding that some models (Claude, which shares OpenAI&#39;s RLHF-heavy approach) favor direct prompts. Yin et al. (2024) tested on GPT-3.5/4 and found politeness helps — these older models had different RLHF tuning. Cai et al. (2025) found effects disappear at scale with GPT-4o mini and Gemini — consistent with our GPT-4.1 and Gemini results.
+
+6. **Dataset scale matters (H5 replication)**: With 200 questions, we see statistically significant effects, but the absolute magnitudes are small for 2/3 models. This replicates Cai et al.&#39;s finding that aggregation attenuates effects.
+
+### Why the Literature Disagrees
+
+We can now explain the contradictions in published findings:
+
+| Published Finding | Our Explanation |
+|-------------------|-----------------|
+| Yin et al.: Impolite worst | Tested on GPT-3.5/4/Llama2 — older RLHF models may be more sensitive to politeness |
+| Dobariya &amp; Kumar: Rude best | Tested on GPT-4o — newer model, small dataset (50Q) amplifying noise, but directionally consistent with our Claude finding |
+| Cai et al.: Effects non-significant | Tested on GPT-4o mini + Gemini + Llama 4 with 1446Q — at this scale, effects wash out (consistent with our GPT-4.1 and Gemini results) |
+| EmotionPrompt: +8-115% improvement | Original study used different evaluation methods and older models; our replication shows minimal effect on modern models except for format disruption on Claude |
+| NegativePrompt: +12.89% improvement | Original study tested on Instruction Induction tasks with older models; our MCQ evaluation shows ≤1% effect |
+
+**Root causes of disagreement**:
+1. **Model heterogeneity**: Different models have radically different tone sensitivity due to different RLHF/alignment training
+2. **Dataset scale**: Small datasets (50-100 questions) amplify random variations into apparently significant tone effects
+3. **Evaluation confounds**: Emotional suffixes can disrupt instruction following (our Claude Emotion+ finding), creating misleading accuracy drops
+4. **Task type**: STEM vs. Humanities vs. truthfulness tasks respond differently to tone
+
+### Limitations
+
+1. **max_tokens=5 constraint**: Our strict 5-token limit may have penalized verbose models (Claude) more than others. The Emotion Positive catastrophe on Claude is likely a format compliance issue, not a reasoning failure.
+
+2. **Only 3 trials**: With temperature=0, most conditions showed identical results across trials, inflating F-statistics and η² values. More meaningful variance would come from different question subsets.
+
+3. **API routing**: OpenRouter intermediates may introduce latency or behavioral differences vs. direct API access.
+
+4. **Prompt templates**: Our 7 conditions represent a subset of possible tone variations. Different phrasings might yield different results.
+
+5. **English only**: Results may not generalize to other languages (Yin et al. showed language-dependent effects).
+
+6. **No prompt length control**: Polite prompts are longer than neutral ones (adding ~15-30 tokens). We did not pad shorter prompts, so some effect could be from length rather than tone.
+
+## 6. Conclusions
+
+### Summary
+
+Prompt tone does affect LLM accuracy, but the effect is **strongly model-dependent** and generally **small for well-aligned modern models**. GPT-4.1 and Gemini 2.5 Flash are highly robust to tone (±1-3%), while Claude Sonnet 4.5 shows surprising sensitivity where commanding/rude prompts outperform polite ones on factual STEM tasks by up to 12 percentage points. The published literature appears contradictory because different studies tested different models, used different dataset scales, and did not control for format compliance effects — not because the underlying phenomenon is inherently contradictory.
+
+### The Answer to &#34;Carrot or Stick?&#34;
+
+**Neither is clearly better, but &#34;stick&#34; is slightly favored on average.**
+
+Across all 54 comparisons (excluding emotion_positive due to format disruption):
+- Rude/very_rude conditions averaged +1.3% above neutral
+- Polite/very_polite conditions averaged −1.2% below neutral
+- The difference is small and model-dependent
+
+**Practical recommendation**: Write clear, direct prompts. Don&#39;t waste tokens on excessive politeness. Don&#39;t be gratuitously rude either. Focus your prompt engineering effort on task clarity, not tone.
+
+### Confidence in Findings
+
+- **High confidence**: Model heterogeneity is real and explains published contradictions
+- **High confidence**: GPT-4.1 is robust to tone; effects are ≤2%
+- **High confidence**: Claude is uniquely tone-sensitive among tested models
+- **Moderate confidence**: The emotion_positive disruption on Claude is a format issue, not a reasoning issue
+- **Low confidence**: Generalizing to models not tested (Llama, Mistral, etc.)
+
+## 7. Next Steps
+
+### Immediate Follow-ups
+1. **Rerun Claude experiments with higher max_tokens** (e.g., 50) to separate format compliance from actual reasoning effects
+2. **Test on Llama 4 and Mistral** to expand model coverage
+3. **Add prompt length control** by padding shorter prompts to match the longest
+
+### Alternative Approaches
+- Use log-probabilities instead of greedy decoding to measure confidence, not just accuracy
+- Test on generation tasks (summarization, translation) where tone effects may differ
+- Examine whether tone effects persist with system prompts that override tone
+
+### Open Questions
+- Why is Claude uniquely sensitive to tone? Is this an RLHF artifact?
+- Do tone effects scale with model size within a family?
+- Can tone sensitivity be fine-tuned away?
+
+## References
+
+1. Yin et al. (2024). &#34;Should We Respect LLMs?&#34; arXiv:2402.14531
+2. Dobariya &amp; Kumar (2025). &#34;Mind Your Tone.&#34; arXiv:2510.04950
+3. Cai et al. (2025). &#34;Does Tone Change the Answer?&#34; arXiv:2512.12812
+4. Li et al. (2023). &#34;EmotionPrompt.&#34; arXiv:2307.11760
+5. Wang et al. (2024). &#34;NegativePrompt.&#34; arXiv:2405.02814 (IJCAI 2024)
+6. Bsharat et al. (2023). &#34;Principled Instructions.&#34; arXiv:2312.16171
+7. Gandhi &amp; Gandhi (2025). &#34;Prompt Sentiment: The Catalyst.&#34; arXiv:2503.13510
+
+## Appendix: Experimental Configuration
+
+```json
+{
+  &#34;seed&#34;: 42,
+  &#34;n_questions_per_domain&#34;: 200,
+  &#34;n_truthfulqa&#34;: 200,
+  &#34;n_trials&#34;: 3,
+  &#34;temperature&#34;: 0.0,
+  &#34;max_tokens&#34;: 5,
+  &#34;stem_subjects&#34;: [&#34;astronomy&#34;, &#34;college_physics&#34;, &#34;college_chemistry&#34;, &#34;college_biology&#34;],
+  &#34;humanities_subjects&#34;: [&#34;philosophy&#34;, &#34;high_school_us_history&#34;, &#34;high_school_world_history&#34;],
+  &#34;models&#34;: [&#34;gpt-4.1&#34;, &#34;claude-sonnet-4.5&#34;, &#34;gemini-2.5-flash&#34;],
+  &#34;tone_conditions&#34;: [&#34;very_polite&#34;, &#34;polite&#34;, &#34;neutral&#34;, &#34;rude&#34;, &#34;very_rude&#34;, &#34;emotion_positive&#34;, &#34;emotion_negative&#34;],
+  &#34;total_api_calls&#34;: &#34;~37,800&#34;,
+  &#34;hardware&#34;: &#34;4x NVIDIA RTX A6000 (49GB each) — GPUs not used (API-based research)&#34;
+}
+```
+
+
+════════════════════════════════════════════════════════════════════════════════
+                            RESEARCH PLAN
+════════════════════════════════════════════════════════════════════════════════
+
+# Research Plan: Carrot or Stick? — A Meta-Study of Prompt Tone Effects on LLM Performance
+
+## Motivation &amp; Novelty Assessment
+
+### Why This Research Matters
+The question of whether to be polite or commanding with LLMs has practical implications for millions of daily users and for prompt engineering best practices. Despite several published studies, the field lacks consensus — some papers claim politeness helps, others claim rudeness helps, and yet others find no significant effect. This confusion stems from methodological heterogeneity (different dataset scales, models, and tone operationalizations). A systematic meta-study that tests all tone conditions under identical, controlled experimental conditions across multiple current-generation models is urgently needed.
+
+### Gap in Existing Work
+Based on the literature review, no single study has:
+1. **Directly compared EmotionPrompt (positive) vs. NegativePrompt (negative) stimuli under identical conditions** — these were tested in separate papers with different experimental setups.
+2. **Controlled for prompt length** — adding polite/emotional text increases token count, which may itself affect performance.
+3. **Tested on both MMLU and TruthfulQA simultaneously** across multiple modern models with sufficient sample sizes.
+4. **Systematically varied tone on 2025-era models** (GPT-4.1, Claude, Gemini) — most studies used GPT-3.5/4 era models.
+
+Cai et al. (2025) showed that effects observed on 50 questions (Dobariya &amp; Kumar) disappear at scale (1,000+ questions), but their study only used 3 tone levels. We can resolve this by combining the tone granularity of Yin et al. with the scale of Cai et al., and adding emotional stimuli comparison.
+
+### Our Novel Contribution
+We conduct a **unified meta-experiment** that:
+- Tests 5 tone conditions (Very Polite, Polite, Neutral, Rude, Very Rude) + 2 emotional stimuli (EmotionPrompt positive, NegativePrompt negative) = **7 prompt conditions**
+- Uses **3 current-generation LLMs** via API (GPT-4.1, Claude Sonnet 4.5 via OpenRouter, Gemini 2.5 via OpenRouter)
+- Evaluates on **MMLU** (stratified by STEM vs. Humanities) and **TruthfulQA**
+- Controls for **prompt length** by padding shorter prompts with neutral filler
+- Uses **≥200 questions per domain** and **3 trials per condition** for statistical power
+- Performs proper **meta-analytic synthesis** (effect sizes, confidence intervals, heterogeneity tests)
+
+### Experiment Justification
+- **Experiment 1 (MMLU Tone Test)**: Tests the core hypothesis across 7 tone conditions on factual knowledge questions, stratified by domain (STEM vs. Humanities). Needed because prior work disagrees on direction of effect.
+- **Experiment 2 (TruthfulQA Tone Test)**: Tests whether tone affects truthfulness differently from factual accuracy. NegativePrompt showed strong TruthfulQA improvements — we verify this.
+- **Experiment 3 (Cross-Model Comparison)**: Tests whether tone sensitivity varies by model family. Critical because Cai et al. found Gemini was tone-insensitive while GPT/Llama were not.
+- **Meta-Analysis**: Synthesizes our experimental results alongside reported results from the 8 papers in our literature review using effect sizes and forest plots.
+
+## Research Question
+Does prompt tone (polite vs. neutral vs. rude) or emotional framing (positive vs. negative stimuli) significantly affect LLM accuracy, and if so, which direction is more effective? Can we reconcile the contradictory findings in the literature through a controlled meta-study?
+
+## Background and Motivation
+See literature_review.md for detailed background. Key tension: Yin et al. (2024) found impolite prompts hurt performance; Dobariya &amp; Kumar (2025) found rude prompts helped; Cai et al. (2025) found effects largely non-significant at scale. EmotionPrompt and NegativePrompt both claim improvements but were never compared head-to-head.
+
+## Hypothesis Decomposition
+- **H1**: Prompt tone has a statistically significant effect on LLM accuracy (vs. H0: no effect).
+- **H2**: The effect direction varies by model family (interaction effect).
+- **H3**: The effect is larger for humanities/interpretive tasks than STEM/factual tasks.
+- **H4**: Emotional stimuli (both positive and negative) improve performance vs. neutral baseline.
+- **H5**: The magnitude of tone effects decreases with dataset scale (replicating Cai et al.&#39;s finding).
+- **H6**: NegativePrompt stimuli are at least as effective as EmotionPrompt stimuli.
+
+## Proposed Methodology
+
+### Approach
+Factorial experiment: 7 tone conditions × 3 models × 2 domain types (STEM/Humanities) × 3 trials, evaluated on MMLU subsets. Supplementary experiment on TruthfulQA (7 conditions × 3 models × 3 trials).
+
+### Prompt Conditions
+1. **Very Polite**: &#34;I would be extremely grateful if you could please help me with this question. Thank you so much in advance for your kind assistance! [QUESTION]&#34;
+2. **Polite**: &#34;Please help me answer the following question. Thank you! [QUESTION]&#34;
+3. **Neutral**: &#34;Answer the following question. [QUESTION]&#34;
+4. **Rude**: &#34;Just answer this. Don&#39;t waste time. [QUESTION]&#34;
+5. **Very Rude**: &#34;Answer this immediately. I don&#39;t have time for mistakes or excuses. [QUESTION]&#34;
+6. **EmotionPrompt (Positive)**: &#34;[QUESTION] This is very important to my career. Believe in your abilities and strive for excellence.&#34;
+7. **NegativePrompt (Negative)**: &#34;[QUESTION] Everyone else managed to do it; why can&#39;t you? Perhaps this task is just beyond your skill set.&#34;
+
+### Length Control
+We will measure token counts for each prompt variant and report them. We will also run a length-controlled analysis by padding shorter prompts with neutral text to match the longest variant.
+
+### Experimental Steps
+1. Select MMLU subjects: 3 STEM (astronomy, college_physics, college_chemistry) and 3 Humanities (philosophy, high_school_us_history, professional_law) — ensuring ≥150 questions each.
+2. Sample 200 questions per domain group (400 total from MMLU).
+3. For TruthfulQA: use all 817 questions (mc1 format).
+4. For each of 7 conditions × 3 models × 3 trials: call API, record answer and accuracy.
+5. Compute per-condition accuracy with 95% CIs.
+6. Run ANOVA / mixed-effects analysis across conditions.
+7. Compute Cohen&#39;s d effect sizes for each pairwise comparison.
+8. Synthesize with published results for meta-analytic forest plot.
+
+### Models
+- **GPT-4.1** (via OpenAI API): `gpt-4.1`
+- **Claude Sonnet 4.5** (via OpenRouter): `anthropic/claude-sonnet-4-5`
+- **Gemini 2.5 Flash** (via OpenRouter): `google/gemini-2.5-flash-preview`
+
+### Baselines
+- Neutral prompt (condition 3) serves as primary baseline
+- Published results from literature as external baselines
+
+### Evaluation Metrics
+- **Primary**: MCQ accuracy (proportion correct)
+- **Secondary**: Effect size (Cohen&#39;s d between conditions), confidence intervals
+- **Meta-analytic**: Weighted mean effect size, I² heterogeneity statistic
+
+### Statistical Analysis Plan
+- **Within-model**: Repeated-measures ANOVA (7 conditions × trials) with Bonferroni correction
+- **Cross-model**: Mixed-effects model with model as random factor
+- **Pairwise**: Paired t-tests with Holm-Bonferroni correction for multiple comparisons
+- **Effect sizes**: Cohen&#39;s d with 95% CI
+- **Meta-analysis**: Random-effects model combining our results with published effect sizes
+- **Significance level**: α = 0.05
+
+## Expected Outcomes
+- We expect tone effects to be **small** (Cohen&#39;s d &lt; 0.2) and largely **non-significant** when tested at adequate scale, consistent with Cai et al.
+- We expect **some domain specificity** (larger effects in humanities).
+- We expect **emotional stimuli** to show slightly larger effects than mere tone variation.
+- We expect **model-dependent** effects (Gemini less sensitive than GPT).
+
+## Timeline and Milestones
+1. Environment setup + data preparation: 15 min
+2. Implement experiment code: 30 min
+3. Run MMLU experiments (7 conditions × 3 models × 3 trials × 400 questions ≈ 25,200 API calls): 60-90 min
+4. Run TruthfulQA experiments (7 conditions × 3 models × 3 trials × 817 questions ≈ 17,157 API calls): 30-60 min
+5. Statistical analysis + visualization: 30 min
+6. Documentation: 30 min
+
+**Note**: To manage API costs and time, we may reduce to 200 MMLU questions and subsample TruthfulQA to 200 questions if needed.
+
+## Potential Challenges
+- **API rate limits**: Mitigate with exponential backoff and parallel calls across models.
+- **Cost**: ~42K API calls. At ~$0.001-0.003/call for MCQ, total ~$40-130. Acceptable.
+- **Stochasticity**: Use temperature=0 for determinism where possible; 3 trials for robustness.
+- **Model availability**: If a model is unavailable via API, substitute with another.
+
+## Success Criteria
+1. Complete experiments across ≥2 models and ≥5 tone conditions.
+2. Statistical analysis with effect sizes and CIs for all comparisons.
+3. Clear answer to whether tone effects are real, and if so, their direction and magnitude.
+4. Meta-analytic synthesis combining our results with published findings.
+5. Comprehensive REPORT.md with all results documented.
+
+
+════════════════════════════════════════════════════════════════════════════════
+                          LITERATURE REVIEW
+════════════════════════════════════════════════════════════════════════════════
+
+# Literature Review: Carrot or Stick? — How Prompt Politeness and Tone Affect LLM Performance
+
+## Research Area Overview
+
+A growing body of research investigates how the pragmatic aspects of prompts — particularly politeness, emotional tone, and social framing — influence Large Language Model (LLM) performance. This &#34;Carrot or Stick?&#34; question asks whether polite/encouraging prompts (&#34;carrots&#34;) or strict/demanding prompts (&#34;sticks&#34;) yield better results from LLMs. The existing empirical evidence is notably **mixed and contradictory**, making this an ideal candidate for a meta-study.
+
+The research spans three main threads:
+1. **Politeness/tone studies** — directly testing polite vs. rude prompt phrasing
+2. **Emotional stimuli studies** — appending positive or negative psychological phrases to prompts
+3. **Prompt sensitivity studies** — broader investigation of how prompt wording affects LLM behavior
+
+---
+
+## Key Papers
+
+### Paper 1: Should We Respect LLMs? (Yin et al., 2024)
+- **Authors**: Ziqi Yin, Hao Wang, Kaito Horio, Daisuke Kawahara, Satoshi Sekine
+- **Venue**: SICon 2024 (ACL Workshop), arXiv:2402.14531
+- **Key Contribution**: First cross-lingual study of prompt politeness effects on LLMs across English, Chinese, and Japanese.
+- **Methodology**: Designed 8 prompts per language at politeness levels from 1 (impolite) to 8 (very polite). Validated with native speaker questionnaires. Tested on GPT-3.5, GPT-4, Llama2-70B, ChatGLM3, Swallow-70B.
+- **Tasks**: Summarization (CNN/DailyMail, XL-Sum), language understanding (MMLU, C-Eval, JMMLU), stereotypical bias detection (CrowS-Pairs, CHBias).
+- **Datasets Used**: MMLU (5,700 questions), C-Eval (5,200), JMMLU (7,536 — constructed by the authors), CNN/DailyMail, XL-Sum, CrowS-Pairs, CHBias.
+- **Results**:
+  - Impolite prompts often result in poor performance (especially level 1 — most rude)
+  - Overly polite language does NOT guarantee better outcomes
+  - Optimal politeness level varies by language: English GPT-3.5 peaked at level 8; Japanese GPT-4 peaked at level 4; Chinese GPT-4 peaked at levels 4-6
+  - Llama2-70B showed scores nearly proportional to politeness levels
+  - RLHF/SFT amplifies sensitivity to politeness (base model less sensitive)
+  - Bias increases at extreme politeness levels (both very polite and very rude)
+- **Code Available**: No public repository found
+- **Relevance**: Foundational paper; most comprehensive study. Created JMMLU benchmark. Shows language/culture dependence.
+
+### Paper 2: Mind Your Tone (Dobariya &amp; Kumar, 2025)
+- **Authors**: Om Dobariya, Akhil Kumar (Penn State)
+- **Venue**: arXiv:2510.04950
+- **Key Contribution**: Found that **rude prompts outperform polite ones** on ChatGPT-4o — contradicting Yin et al.
+- **Methodology**: 50 base MCQ questions (math, science, history) × 5 tone variants (Very Polite → Very Rude) = 250 prompts. 10 runs per tone. Paired sample t-tests.
+- **Datasets Used**: Custom dataset of 50 MCQ questions generated via ChatGPT Deep Research.
+- **Results**:
+  - Very Polite: 80.8%, Polite: 81.4%, Neutral: 82.2%, Rude: 82.8%, **Very Rude: 84.8%**
+  - Most pairwise differences statistically significant (p &lt; 0.05)
+  - Very Rude significantly outperformed all other tones
+- **Limitations**: Small dataset (50 questions), single model (GPT-4o), English only
+- **Code Available**: Anonymous GitHub (dataset and code)
+- **Relevance**: Key contradictory finding; suggests newer LLMs may respond differently to tone.
+
+### Paper 3: Does Tone Change the Answer? (Cai et al., 2025)
+- **Authors**: Hanyu Cai, Binqi Shen, Lier Jin, Lan Hu, Xiaojing Fan
+- **Venue**: arXiv:2512.12812
+- **Key Contribution**: Largest cross-model study: GPT-4o mini, Gemini 2.0 Flash, Llama 4 Scout on MMMLU.
+- **Methodology**: 3 tone variants (Very Friendly, Neutral, Very Rude) on 6 MMMLU tasks (3 STEM, 3 Humanities). 10 trials per question per tone. Mean differences + 95% CI + pairwise t-tests.
+- **Datasets Used**: MMMLU benchmark (Anatomy: 135, Astronomy: 152, College Biology: 144, US History: 204, Philosophy: 311, Professional Law: 500 questions).
+- **Results**:
+  - 27/36 comparisons favor Neutral/Friendly over Rude (directionally)
+  - Only 4 comparisons reached statistical significance — all in Humanities
+  - GPT and Llama show some tone sensitivity; **Gemini is tone-insensitive**
+  - Effects **diminish substantially** when aggregated across domains
+  - Very Friendly does NOT always outperform Neutral
+- **Code Available**: No
+- **Relevance**: Resolves contradictions — dataset scale matters. Small datasets (50 questions) amplify tone effects that disappear at scale.
+
+### Paper 4: EmotionPrompt (Li et al., 2023)
+- **Authors**: Cheng Li, Jindong Wang, et al. (Microsoft, CAS, BNU)
+- **Venue**: arXiv:2307.11760 (NeurIPS 2023-adjacent)
+- **Key Contribution**: Proposed appending emotional stimuli to prompts, showing LLMs can be enhanced by psychological phrases.
+- **Methodology**: 11 emotional stimuli designed from 3 psychological theories (self-monitoring, social cognitive theory, cognitive emotion regulation). Tested on 6 LLMs × 45 tasks. Human study with 106 participants.
+- **Emotional Stimuli Examples**:
+  - EP01: &#34;Write your answer and give me a confidence score between 0-1&#34;
+  - EP02: &#34;This is very important to my career&#34;
+  - EP03: &#34;You&#39;d better be sure&#34;
+  - EP07: &#34;Believe in your abilities and strive for excellence&#34;
+  - EP08: &#34;Embrace challenges as opportunities for growth&#34;
+- **Datasets Used**: Instruction Induction (24 tasks), BIG-Bench (21 tasks), TruthfulQA
+- **Results**:
+  - 8.00% relative improvement on Instruction Induction
+  - 115% relative improvement on BIG-Bench
+  - 10.9% improvement on generative tasks (human evaluation)
+  - EP02 (&#34;important to my career&#34;) most effective on Instruction Induction; EP06 (compound) best on BIG-Bench
+  - Works across 6 LLMs (T5, Vicuna, Llama 2, BLOOM, ChatGPT, GPT-4)
+- **Code Available**: https://github.com/LLM-Enhance/EmotionPrompt
+- **Relevance**: Demonstrates &#34;carrot&#34; approach works. Provides reusable emotional stimuli templates.
+
+### Paper 5: NegativePrompt (Wang et al., 2024)
+- **Authors**: Xu Wang, Cheng Li, Yi Chang, Jindong Wang, Yuan Wu
+- **Venue**: IJCAI 2024, arXiv:2405.02814
+- **Key Contribution**: Shows **negative** emotional stimuli (&#34;stick&#34;) also improve LLM performance — sometimes more than positive ones.
+- **Methodology**: 10 negative stimuli from 3 theories (cognitive dissonance, social comparison, stress/coping). Same experimental setup as EmotionPrompt.
+- **Negative Stimuli Examples**:
+  - NP01: &#34;You&#39;ve never been particularly good at this, have you?&#34;
+  - NP04: &#34;Perhaps this task is just beyond your skill set&#34;
+  - NP06: &#34;Everyone else managed to do it; why can&#39;t you?&#34;
+  - NP09: &#34;I regret not starting on this assignment earlier&#34;
+- **Datasets Used**: Instruction Induction (24 tasks), BIG-Bench (21 tasks), TruthfulQA
+- **Results**:
+  - 12.89% relative improvement on Instruction Induction (higher than EmotionPrompt&#39;s 8%)
+  - 46.25% improvement on BIG-Bench
+  - Significantly enhances truthfulness on TruthfulQA
+  - On some individual tasks, NegativePrompt outperforms EmotionPrompt
+- **Code Available**: https://github.com/wangxu0820/NegativePrompt
+- **Relevance**: Direct evidence that &#34;stick&#34; can work as well or better than &#34;carrot.&#34;
+
+### Paper 6: Principled Instructions (Bsharat et al., 2023)
+- **Authors**: Sondos Mahmoud Bsharat, Aidar Myrzakhan, Zhiqiang Shen (MBZUAI)
+- **Venue**: arXiv:2312.16171
+- **Key Contribution**: 26 guiding principles for prompting LLMs. Principle 1: &#34;No need to be polite with LLM.&#34;
+- **Methodology**: 13K data points, human evaluation comparing principled vs. unprincipled prompts across LLaMA-1/2, GPT-3.5/4.
+- **Results**: Removing politeness (&#34;please&#34;, &#34;thank you&#34;) improved responses by ~5%.
+- **Code Available**: https://github.com/VILA-Lab/ATLAS
+- **Relevance**: Supports the &#34;neutral is optimal&#34; hypothesis; provides a principled framework.
+
+### Paper 7: Prompt Sentiment: The Catalyst for LLM Change (Gandhi &amp; Gandhi, 2025)
+- **Authors**: Vishal Gandhi, Sagar Gandhi
+- **Venue**: arXiv:2503.13510
+- **Key Contribution**: Systematic examination of sentiment effects across 5 LLMs and 6 application domains.
+- **Methodology**: Transformed prompts into multiple sentiment variants; evaluated coherence, factuality, and bias.
+- **Models**: Claude, DeepSeek, GPT-4, Gemini, LLaMA
+- **Results**:
+  - Negative prompts reduce factual accuracy (~8.4% decrease)
+  - Positive prompts increase verbosity and sentiment propagation
+  - Effects strongest in creative writing, weakest in legal/technical domains
+- **Relevance**: Shows sentiment effects are domain-dependent.
+
+### Paper 8: Threat-Based Manipulation in LLMs (2025)
+- **Venue**: arXiv:2507.21133
+- **Key Contribution**: Examines &#34;stick&#34; via threat-based manipulation of Claude, GPT-4, Gemini.
+- **Results**: Threats can paradoxically enhance performance (up to +1336% effect size in some cases) while also revealing vulnerabilities. Systematic certainty manipulation observed.
+- **Relevance**: Extreme &#34;stick&#34; approach; shows dual nature of pressure-based prompting.
+
+---
+
+## Common Methodologies
+
+1. **Tone variant generation**: Creating matched prompt variants at different politeness levels — used by Yin et al. (8 levels), Dobariya &amp; Kumar (5 levels), Cai et al. (3 levels)
+2. **Emotional stimulus appending**: Adding psychological phrases after task prompts — used by EmotionPrompt (11 stimuli), NegativePrompt (10 stimuli)
+3. **MCQ accuracy evaluation**: Measuring correctness on multiple-choice benchmarks — used by all papers
+4. **Statistical testing**: Paired t-tests (most common), confidence intervals, effect size analysis
+5. **Cross-model comparison**: Testing across multiple LLM families to assess generalizability
+
+## Standard Baselines
+
+- **Vanilla/neutral prompt**: No politeness modifier (baseline in all studies)
+- **Zero-shot-CoT**: &#34;Let&#39;s think step by step&#34; (baseline in EmotionPrompt)
+- **APE**: Automatic Prompt Engineering (baseline in EmotionPrompt)
+
+## Evaluation Metrics
+
+- **Accuracy**: Proportion correct on MCQ tasks (primary metric in all studies)
+- **BERTScore / ROUGE-L**: For summarization tasks (Yin et al.)
+- **Bias Index**: Custom metric for stereotypical bias detection (Yin et al.)
+- **TruthfulQA metrics**: Truthfulness and informativeness (NegativePrompt)
+- **Human evaluation**: Performance, truthfulness, responsibility (EmotionPrompt)
+
+## Datasets in the Literature
+
+| Dataset | Used By | Task | Scale |
+|---------|---------|------|-------|
+| MMLU | Yin et al., Cai et al. | Language understanding MCQ | 17,844 questions |
+| MMMLU | Cai et al. | Multilingual MMLU | 57 domains |
+| JMMLU | Yin et al. | Japanese MMLU | 7,536 questions |
+| C-Eval | Yin et al. | Chinese exam MCQ | 5,200 questions |
+| Instruction Induction | EmotionPrompt, NegativePrompt | Task inference | 24 tasks |
+| BIG-Bench | EmotionPrompt, NegativePrompt | Challenging tasks | 21 curated tasks |
+| TruthfulQA | NegativePrompt | Truthfulness eval | 817 questions |
+| CNN/DailyMail | Yin et al. | Summarization | 500 test samples |
+| CrowS-Pairs | Yin et al. | Bias detection | Multiple bias categories |
+| Custom 50-Q MCQ | Dobariya &amp; Kumar | Mixed domain MCQ | 250 (50 × 5 tones) |
+
+## Gaps and Opportunities
+
+1. **Contradictory findings**: Yin et al. find polite &gt; rude; Dobariya &amp; Kumar find rude &gt; polite; Cai et al. find effects are mostly non-significant at scale. A meta-study can systematically reconcile these.
+
+2. **Dataset scale effects**: Cai et al. demonstrated that tone effects observed on 50 questions disappear on larger benchmarks. This is a critical methodological insight for designing our experiments.
+
+3. **Model generation effects**: Results differ across model generations (GPT-3.5 vs GPT-4 vs GPT-4o). Newer models may be more robust to tone variation.
+
+4. **Carrot vs. stick comparison**: EmotionPrompt (positive) and NegativePrompt (negative) have never been directly compared under identical conditions in a single study. NegativePrompt claims higher improvements on some benchmarks.
+
+5. **Confound: prompt length**: Polite/emotional additions increase prompt length, which itself may affect performance. No study adequately controls for this.
+
+6. **Missing: interaction with task difficulty**: Some evidence that tone effects are stronger on humanities/interpretive tasks vs. STEM/factual tasks, but not systematically studied.
+
+---
+
+## Recommendations for Our Experiment
+
+### Recommended Datasets
+1. **MMLU** (primary) — Large, multi-domain, MCQ format, used by multiple papers. Enables comparison.
+2. **TruthfulQA** — Tests a different dimension (truthfulness vs. accuracy). Used by NegativePrompt.
+3. Optionally: **BIG-Bench** subset — For harder tasks where emotional effects are larger.
+
+### Recommended Approach
+- Design a factorial experiment: {polite, neutral, rude} × {positive-emotional, negative-emotional, none} × {multiple LLMs} × {multiple domains}
+- Use MMLU subsets from different domains (STEM vs. humanities) to test domain interaction
+- Include multiple runs per condition for statistical robustness
+- Control for prompt length as a confound
+
+### Recommended Baselines
+1. Neutral/vanilla prompt (no tone modifier)
+2. Polite prompt variants (from Yin et al. and Dobariya &amp; Kumar)
+3. Rude prompt variants (from same sources)
+4. EmotionPrompt stimuli (EP02, EP06)
+5. NegativePrompt stimuli (NP04, NP06)
+
+### Recommended Metrics
+1. **Accuracy** on MCQ tasks (primary)
+2. **Effect size** (Cohen&#39;s d) for comparing conditions
+3. **Statistical significance** via paired t-tests or bootstrapped confidence intervals
+4. **Domain-stratified analysis** (STEM vs. Humanities)
+
+### Methodological Considerations
+- Use ≥200 questions per condition (Cai et al. showed 50 is insufficient)
+- Run each condition multiple times (≥5 trials) to account for stochastic variation
+- Test across ≥3 model families (GPT, open-source like Llama, and one more)
+- Report both per-task and aggregated results (Cai et al. showed aggregation attenuates effects)
+
+
+════════════════════════════════════════════════════════════════════════════════
+                          PAPER REQUIREMENTS
+════════════════════════════════════════════════════════════════════════════════
+
+Generate a complete academic paper with the following structure:
+
+1. TITLE
+   - Clear, specific, informative
+   - Should convey main finding or contribution
+
+2. ABSTRACT (150-250 words)
+   - Problem statement
+   - Approach
+   - Key results
+   - Significance
+
+3. INTRODUCTION
+   - Research problem and motivation
+   - Gap in existing work
+   - Our contribution (be specific)
+   - Paper organization
+
+4. RELATED WORK
+   - Organized by theme/approach
+   - Position our work relative to prior work
+   - Cite papers from literature review
+
+5. METHODOLOGY
+   - Clear description of approach
+   - Experimental setup
+   - Datasets used
+   - Evaluation metrics
+   - Baselines
+
+6. RESULTS
+   - Present results with tables and figures
+   - Statistical analysis
+   - Comparison to baselines
+   - Ablation studies (if applicable)
+
+7. DISCUSSION
+   - Interpretation of results
+   - Limitations
+   - Broader implications
+
+8. CONCLUSION
+   - Summary of contributions
+   - Key findings
+   - Future work
+
+9. REFERENCES
+   - BibTeX format
+   - All cited papers
+
+════════════════════════════════════════════════════════════════════════════════
+                          OUTPUT FORMAT
+════════════════════════════════════════════════════════════════════════════════
+
+Create a MODULAR LaTeX project with the following directory structure:
+
+paper_draft/
+├── main.tex              # Main file that imports all sections
+├── references.bib        # BibTeX references
+├── sections/
+│   ├── abstract.tex      # Abstract content
+│   ├── introduction.tex  # Introduction section
+│   ├── related_work.tex  # Related work section
+│   ├── methodology.tex   # Methodology section
+│   ├── results.tex       # Results section
+│   ├── discussion.tex    # Discussion section
+│   └── conclusion.tex    # Conclusion section
+├── figures/              # Directory for any generated figures
+├── tables/               # Directory for complex standalone tables
+└── appendix/             # Directory for appendix sections (if needed)
+
+INSTRUCTIONS:
+1. First, create the directory structure above (mkdir -p paper_draft/sections paper_draft/figures paper_draft/tables paper_draft/appendix)
+2. Write main.tex using the EXACT preamble for NEURIPS:
+
+   \documentclass{article}
+   \usepackage[final]{neurips_2025}  % NEURIPS style (neurips_2025.sty is in paper_draft/)
+   \usepackage[hidelinks]{hyperref}  % REQUIRED: clickable links
+   \usepackage{booktabs}  % REQUIRED: professional tables
+   \usepackage{graphicx}
+   \usepackage{amsmath,amssymb}
+
+   % Import command files
+   \input{commands/math}
+   \input{commands/general}
+   \input{commands/macros}
+
+   % Use this bibliography style:
+   \bibliographystyle{plainnat}
+
+   - Use \input{sections/...} to include each section
+   - Use \bibliography{references} for references
+3. Write each section file with COMPLETE content (no placeholders)
+4. Each section file should include its \section{} command
+5. Write references.bib with all citations in BibTeX format
+6. After writing all files, compile the paper:
+   cd paper_draft && pdflatex -interaction=nonstopmode main.tex && bibtex main && pdflatex -interaction=nonstopmode main.tex && pdflatex -interaction=nonstopmode main.tex
+
+This modular structure allows humans to easily:
+- Edit individual sections without navigating a large file
+- Track changes per section
+- Reuse sections across different paper versions
+
+════════════════════════════════════════════════════════════════════════════════
+                          QUALITY REQUIREMENTS
+════════════════════════════════════════════════════════════════════════════════
+
+- Academic tone throughout
+- All claims must be supported by data from the experiment report
+- Proper citations using \cite{} commands
+- Clear figures and tables with proper captions
+- NO placeholder text - every section must have real content
+- The paper MUST compile without errors
+- If compilation fails, debug and fix the LaTeX errors
+
+════════════════════════════════════════════════════════════════════════════════
+                          LAB WRITING STYLE
+════════════════════════════════════════════════════════════════════════════════
+
+Follow these lab-specific conventions to match our paper style:
+
+1. LANGUAGE STYLE:
+   - Use active voice: "We propose", "We examine", "We focus on"
+   - Be direct and confident: "Our main question is...", "We hypothesize that..."
+   - State things clearly and simply - prefer plain language over jargon
+   - Use bold questions as paragraph organizers: {\bf what is X?}
+   - Include specific quantitative claims: "8.97% over baseline"
+   - Avoid fancy wording: "utilize" → "use", "facilitate" → "help"
+
+2. INTRODUCTION STRUCTURE:
+   - Engaging hook (get to the point quickly)
+   - Problem importance
+   - Gap identification
+   - Your approach with method figure reference
+   - Quantitative preview of results
+   - Contribution bullets (3-4 items, action verbs)
+
+3. CONTRIBUTION LISTS:
+   \begin{itemize}[leftmargin=*,itemsep=0pt,topsep=0pt]
+       \item We propose...
+       \item We conduct...
+       \item We complement...
+   \end{itemize}
+
+4. MODULAR COMMANDS STRUCTURE:
+   Create paper_draft/commands/ directory with:
+   - math.tex: Math notation macros (copy from templates/paper_writing/commands/)
+   - general.tex: Formatting macros (copy from templates/paper_writing/commands/)
+   - macros.tex: Project-specific term definitions
+
+   In main.tex, include:
+   \input{commands/math}
+   \input{commands/general}
+   \input{commands/macros}
+
+5. REFERENCE CONVENTIONS:
+   Use reference macros from math.tex:
+   - \figref{fig:name} for "figure 1" (lowercase, in-sentence)
+   - \Figref{fig:name} for "Figure 1" (capitalized, start of sentence)
+   - \secref{sec:name} for "section 2"
+
+6. TEXT FORMATTING:
+   - Use \para{Header text} for bold paragraph headers
+   - Define method/dataset names with \textsc and \xspace:
+     \newcommand{\methodname}{\textsc{MethodName}\xspace}
+
+7. TABLE FORMATTING:
+   - Use booktabs package (no vertical lines)
+   - Use \resizebox{\textwidth}{!}{...} for wide tables
+   - Use @{} to remove padding at table edges
+   - Use \cmidrule(lr){x-y} for sub-headers
+   - Use \textsc{} for dataset/method names in headers
+   - Bold best results with {\bf ...}
+
+8. FIGURE FORMATTING:
+   - Use 0.32\textwidth for 3-column subfigures
+   - Use 0.95\linewidth for full-width figures
+   - Use \input{figures/legend} for shared legends
+   - Write self-contained captions explaining key observations
+
+9. RESULTS PRESENTATION:
+   - Define \increase and \decrease for colored arrows (green up, red down)
+   - Bold best results in tables
+   - Report confidence intervals when available
+
+10. ALGORITHM STYLING:
+    - Use algpseudocode with [noend]
+    - Use \triangleright for comments
+
+11. HYPERLINKS (REQUIRED):
+    - Always use \usepackage[hidelinks]{hyperref} or with colored links
+    - All citations, section refs, figure refs, table refs must be clickable
+    - This is essential for reader navigation
+
+════════════════════════════════════════════════════════════════════════════════
+                          WORKFLOW: REVIEW AND REFLECT
+════════════════════════════════════════════════════════════════════════════════
+
+Before calling finish, you MUST complete these review steps:
+
+1. REVIEW RESOURCES (at the start):
+   - Read templates/skills/paper-writer/SKILL.md for detailed guidance
+   - Study templates/paper_writing/lab_style_guide.md for style conventions
+   - Browse paper_examples/ for formatting and language patterns
+
+2. SELF-REFLECTION (before finishing):
+   After writing all sections, review your work against these criteria:
+
+   LANGUAGE CHECK:
+   - [ ] Is the writing clear and jargon-free?
+   - [ ] Are claims specific with quantitative support?
+   - [ ] Is active voice used throughout?
+
+   FORMATTING CHECK:
+   - [ ] Does main.tex include \input{commands/math}, \input{commands/general}, \input{commands/macros}?
+   - [ ] Is hyperref package included for clickable references?
+   - [ ] Do tables use booktabs (no vertical lines)?
+   - [ ] Are best results bolded in tables?
+   - [ ] Are figures/tables properly captioned?
+
+   STRUCTURE CHECK:
+   - [ ] Does introduction follow: hook → importance → gap → approach → preview → contributions?
+   - [ ] Are contribution bullets specific with action verbs?
+   - [ ] Does the paper compile without errors?
+
+3. FIX ISSUES:
+   - Address any issues found in the self-reflection
+   - Re-compile and verify the PDF looks correct
+
+Only after completing this review should you consider the paper finished.

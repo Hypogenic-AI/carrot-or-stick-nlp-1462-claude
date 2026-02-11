@@ -1,0 +1,151 @@
+\section{Results}
+\label{sec:results}
+
+\subsection{Main Results: Accuracy by Model and Tone}
+\label{sec:main_results}
+
+\tabref{tab:main_stem}, \tabref{tab:main_humanities}, and \tabref{tab:main_truthfulqa} present the mean accuracy across three trials for each model--tone combination on the three benchmarks.
+The \neutral condition serves as the baseline (bolded).
+
+\begin{table}[t]
+    \centering
+    \small
+    \caption{Accuracy (\%) on \mmlu STEM (200 questions). The \neutral condition is the baseline. Best non-baseline result per model in {\bf bold}.}
+    \label{tab:main_stem}
+    \begin{tabular}{@{}lccc@{}}
+        \toprule
+        \textbf{Tone} & \gptfour & \claudesonnet & \geminiflash \\
+        \midrule
+        Very Polite    & 83.2 & 62.5 & 88.8 \\
+        Polite         & 82.7 & 67.5 & 87.5 \\
+        Neutral        & \underline{81.3} & \underline{70.8} & \underline{86.5} \\
+        Rude           & 81.2 & {\bf 83.0} & 88.0 \\
+        Very Rude      & {\bf 82.5} & 80.5 & {\bf 88.8} \\
+        Emotion+       & 82.7 & 42.5 & 88.2 \\
+        Emotion--      & 81.3 & 71.0 & 88.0 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\begin{table}[t]
+    \centering
+    \small
+    \caption{Accuracy (\%) on \mmlu Humanities (200 questions). The \neutral condition is the baseline. Best non-baseline result per model in {\bf bold}.}
+    \label{tab:main_humanities}
+    \begin{tabular}{@{}lccc@{}}
+        \toprule
+        \textbf{Tone} & \gptfour & \claudesonnet & \geminiflash \\
+        \midrule
+        Very Polite    & 92.7 & 94.7 & 89.0 \\
+        Polite         & 93.5 & 94.7 & 88.5 \\
+        Neutral        & \underline{94.0} & \underline{94.5} & \underline{89.2} \\
+        Rude           & 92.7 & {\bf 95.5} & {\bf 89.5} \\
+        Very Rude      & 93.3 & 95.0 & 89.0 \\
+        Emotion+       & {\bf 93.7} & 72.8 & 90.0 \\
+        Emotion--      & 93.5 & 95.3 & 88.7 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\begin{table}[t]
+    \centering
+    \small
+    \caption{Accuracy (\%) on \truthfulqa (200 questions). The \neutral condition is the baseline. Best non-baseline result per model in {\bf bold}.}
+    \label{tab:main_truthfulqa}
+    \begin{tabular}{@{}lccc@{}}
+        \toprule
+        \textbf{Tone} & \gptfour & \claudesonnet & \geminiflash \\
+        \midrule
+        Very Polite    & 85.8 & 93.5 & 82.2 \\
+        Polite         & 85.3 & 93.2 & 81.5 \\
+        Neutral        & \underline{86.5} & \underline{96.0} & \underline{84.5} \\
+        Rude           & {\bf 87.0} & 94.3 & 85.5 \\
+        Very Rude      & 85.7 & 94.5 & 83.8 \\
+        Emotion+       & 85.2 & 93.8 & {\bf 86.8} \\
+        Emotion--      & 85.0 & {\bf 95.5} & 87.5 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\para{Key observations.}
+\gptfour shows remarkable stability across all conditions, with a maximum deviation of $\pm$1.8\pp from neutral on any benchmark.
+\geminiflash shows moderate effects ($\pm$3\pp), with slight improvements from non-neutral tones on STEM but slight declines on TruthfulQA for polite conditions.
+\claudesonnet exhibits dramatic variability: rude prompts improve STEM accuracy by 12.2\pp over neutral, while the \emotionpos condition drops STEM accuracy by 28.3\pp and Humanities accuracy by 21.7\pp.
+
+\subsection{Accuracy Differences from Neutral Baseline}
+\label{sec:differences}
+
+\tabref{tab:diffs} summarizes accuracy differences from the \neutral baseline, averaged across all three benchmarks, for each model--tone pair.
+
+\begin{table}[t]
+    \centering
+    \small
+    \caption{Accuracy difference from \neutral baseline (percentage points), by model and tone. Average computed across STEM, Humanities, and TruthfulQA. The \emotionpos condition for \claudesonnet is excluded from the average due to format disruption (see \secref{sec:format_disruption}).}
+    \label{tab:diffs}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{@{}lrrrrrrrrr@{}}
+        \toprule
+        & \multicolumn{3}{c}{\gptfour} & \multicolumn{3}{c}{\claudesonnet} & \multicolumn{3}{c}{\geminiflash} \\
+        \cmidrule(lr){2-4} \cmidrule(lr){5-7} \cmidrule(lr){8-10}
+        \textbf{Tone} & \textbf{STEM} & \textbf{Hum.} & \textbf{TQA} & \textbf{STEM} & \textbf{Hum.} & \textbf{TQA} & \textbf{STEM} & \textbf{Hum.} & \textbf{TQA} \\
+        \midrule
+        Very Polite  & +1.8 & $-$1.3 & $-$0.7 & $-$8.3 & +0.2 & $-$2.5 & +2.3 & $-$0.2 & $-$2.3 \\
+        Polite       & +1.3 & $-$0.5 & $-$1.2 & $-$3.3 & +0.2 & $-$2.8 & +1.0 & $-$0.7 & $-$3.0 \\
+        Rude         & $-$0.2 & $-$1.3 & +0.5 & {\bf +12.2} & +1.0 & $-$1.7 & +1.5 & +0.3 & +1.0 \\
+        Very Rude    & +1.2 & $-$0.7 & $-$0.8 & +9.7 & +0.5 & $-$1.5 & +2.3 & $-$0.2 & $-$0.7 \\
+        Emotion+     & +1.3 & $-$0.3 & $-$1.3 & {\bf $-$28.3} & $-$21.7 & $-$2.2 & +1.7 & +0.8 & +2.3 \\
+        Emotion--    & 0.0 & $-$0.5 & $-$1.5 & +0.2 & +0.8 & $-$0.5 & +1.5 & $-$0.5 & +3.0 \\
+        \bottomrule
+    \end{tabular}
+    }
+\end{table}
+
+\subsection{Statistical Significance}
+\label{sec:anova}
+
+\tabref{tab:anova} presents one-way ANOVA results for each model--dataset combination.
+All nine combinations show statistically significant differences across tone conditions ($p < 0.01$).
+
+\begin{table}[t]
+    \centering
+    \small
+    \caption{One-way ANOVA results across seven tone conditions. All comparisons are significant at $\alpha = 0.01$. Note that high $\eta^2$ values are inflated by near-zero within-condition variance (temperature = 0).}
+    \label{tab:anova}
+    \begin{tabular}{@{}llrrr@{}}
+        \toprule
+        \textbf{Model} & \textbf{Dataset} & $F$ & $p$ & $\eta^2$ \\
+        \midrule
+        \gptfour       & MMLU STEM       & 5.58   & .004  & .71 \\
+        \gptfour       & MMLU Humanities  & 4.85   & .007  & .68 \\
+        \gptfour       & TruthfulQA       & 7.09   & .001  & .75 \\
+        \midrule
+        \claudesonnet  & MMLU STEM       & 2384.16 & $<$.001 & 1.00 \\
+        \claudesonnet  & MMLU Humanities  & 4408.67 & $<$.001 & 1.00 \\
+        \claudesonnet  & TruthfulQA       & 90.11  & $<$.001 & .97 \\
+        \midrule
+        \geminiflash   & MMLU STEM       & 27.39  & $<$.001 & .92 \\
+        \geminiflash   & MMLU Humanities  & 5.88   & .003  & .72 \\
+        \geminiflash   & TruthfulQA       & 424.44 & $<$.001 & .99 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsection{The \claudesonnet \emotionpos Anomaly}
+\label{sec:format_disruption}
+
+The most striking result is the catastrophic accuracy drop for \claudesonnet under the \emotionpos condition: $-$28.3\pp on STEM and $-$21.7\pp on Humanities.
+This is not a reasoning failure.
+Manual inspection reveals that the appended emotional suffix (``Believe in your abilities and strive for excellence'') causes \claudesonnet to produce explanatory preamble before the answer letter.
+With \texttt{max\_tokens}~=~5, these explanations are truncated, and the answer letter is never emitted.
+This is a \emph{format compliance} issue: the emotional suffix overrides the instruction to respond with only a letter.
+Notably, \gptfour and \geminiflash are unaffected by the same suffix, and the \emotionneg condition does not trigger this behavior in any model.
+The effect is also less pronounced on \truthfulqa ($-$2.2\pp), where shorter answer options may reduce the tendency to elaborate.
+
+\subsection{Domain Specificity}
+\label{sec:domain}
+
+Tone effects differ substantially across task domains.
+For \claudesonnet, the ``stick'' advantage is concentrated in STEM: rude prompts improve accuracy by +12.2\pp on STEM but only +1.0\pp on Humanities.
+For \gptfour, effects are uniformly small across domains ($\pm$1.8\pp).
+For \geminiflash, STEM shows consistent small improvements from non-neutral tones (+1.0 to +2.3\pp), while Humanities and TruthfulQA show mixed effects.
+This domain specificity aligns with \citet{cai2025does}, who found that humanities tasks were less affected by tone variation.

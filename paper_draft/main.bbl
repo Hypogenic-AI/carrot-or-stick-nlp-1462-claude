@@ -1,0 +1,71 @@
+\begin{thebibliography}{9}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Bsharat et~al.(2023)Bsharat, Myrzakhan, and
+  Shen]{bsharat2023principled}
+Sondos~Mahmoud Bsharat, Aidar Myrzakhan, and Zhiqiang Shen.
+\newblock Principled instructions are all you need for questioning {LLaMA-1/2,
+  GPT-3.5/4}.
+\newblock \emph{arXiv preprint arXiv:2312.16171}, 2023.
+
+\bibitem[Cai et~al.(2025)Cai, Shen, Jin, Hu, and Fan]{cai2025does}
+Hanyu Cai, Binqi Shen, Lier Jin, Lan Hu, and Xiaojing Fan.
+\newblock Does tone change the answer? evaluating {LLM} sensitivity to
+  politeness across models, tasks, and scales.
+\newblock \emph{arXiv preprint arXiv:2512.12812}, 2025.
+
+\bibitem[Dobariya and Kumar(2025)]{dobariya2025mind}
+Om~Dobariya and Akhil Kumar.
+\newblock Mind your tone: An exploration of rude vs. polite prompting in
+  chatgpt.
+\newblock \emph{arXiv preprint arXiv:2510.04950}, 2025.
+
+\bibitem[Gandhi and Gandhi(2025)]{gandhi2025prompt}
+Vishal Gandhi and Sagar Gandhi.
+\newblock Prompt sentiment: The catalyst for {LLM} change.
+\newblock \emph{arXiv preprint arXiv:2503.13510}, 2025.
+
+\bibitem[Hendrycks et~al.(2021)Hendrycks, Burns, Basart, Zou, Mazeika, Song,
+  and Steinhardt]{hendrycks2021measuring}
+Dan Hendrycks, Collin Burns, Steven Basart, Andy Zou, Mantas Mazeika, Dawn
+  Song, and Jacob Steinhardt.
+\newblock Measuring massive multitask language understanding.
+\newblock \emph{Proceedings of the International Conference on Learning
+  Representations (ICLR)}, 2021.
+
+\bibitem[Li et~al.(2023)Li, Wang, Zhang, Zhu, Hou, Lian, Luo, Yang, and
+  Xie]{li2023emotionprompt}
+Cheng Li, Jindong Wang, Yixuan Zhang, Kaijie Zhu, Wenxin Hou, Jianxun Lian,
+  Fang Luo, Qiang Yang, and Xing Xie.
+\newblock {EmotionPrompt}: Leveraging psychology for large language models
+  enhancement via emotional stimulus.
+\newblock \emph{arXiv preprint arXiv:2307.11760}, 2023.
+
+\bibitem[Lin et~al.(2022)Lin, Hilton, and Evans]{lin2022truthfulqa}
+Stephanie Lin, Jacob Hilton, and Owain Evans.
+\newblock {TruthfulQA}: Measuring how models mimic human falsehoods.
+\newblock \emph{Proceedings of the 60th Annual Meeting of the Association for
+  Computational Linguistics (ACL)}, 2022.
+
+\bibitem[Wang et~al.(2024)Wang, Li, Chang, Wang, and
+  Wu]{wang2024negativeprompt}
+Xu~Wang, Cheng Li, Yi~Chang, Jindong Wang, and Yuan Wu.
+\newblock Large language models are not yet human-level evaluators for
+  abstractive summarization.
+\newblock In \emph{Proceedings of the International Joint Conference on
+  Artificial Intelligence (IJCAI)}, 2024.
+\newblock NegativePrompt: Leveraging Psychology for Large Language Models
+  Enhancement via Negative Emotional Stimuli. arXiv:2405.02814.
+
+\bibitem[Yin et~al.(2024)Yin, Wang, Horio, Kawahara, and Sekine]{yin2024should}
+Ziqi Yin, Hao Wang, Kaito Horio, Daisuke Kawahara, and Satoshi Sekine.
+\newblock Should we respect {LLMs}? a cross-lingual study on the influence of
+  prompt politeness on {LLM} performance.
+\newblock In \emph{Proceedings of the 3rd Workshop on Social Influence in
+  Conversations (SICon 2024)}, 2024.
+
+\end{thebibliography}

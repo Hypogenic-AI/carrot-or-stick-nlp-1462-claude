@@ -1,0 +1,12 @@
+\section{Conclusion}
+\label{sec:conclusion}
+
+We conducted a controlled meta-experiment testing seven prompt tone conditions across three current-generation LLMs on three benchmarks, totaling 189 experimental runs and approximately 37,800 API calls.
+Our central finding is that prompt tone effects are \emph{strongly model-dependent}: \gptfour and \geminiflash are robust to tone ($\pm$1--3\pp), while \claudesonnet shows large effects where commanding prompts improve STEM accuracy by up to 12.2\pp and positive emotional suffixes catastrophically disrupt instruction following ($-$28.3\pp).
+This model heterogeneity is the primary reason prior studies disagree---they tested different models under different conditions and reached contradictory conclusions.
+
+Neither carrot nor stick is clearly better across the board.
+Across all model--tone--dataset comparisons (excluding the \claudesonnet format disruption cases), rude conditions average +1.3\pp above neutral while polite conditions average $-$1.2\pp below neutral---a small and practically marginal difference.
+The answer to ``carrot or stick?'' is that \emph{neither matters much for well-aligned modern LLMs}, and practitioners should invest their effort in prompt clarity rather than prompt tone.
+
+Future work should extend this analysis to open-source model families, test with higher token limits to separate format compliance from reasoning ability, and investigate why specific models develop tone sensitivity during alignment training.

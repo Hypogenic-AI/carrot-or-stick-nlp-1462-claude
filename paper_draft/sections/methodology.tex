@@ -1,0 +1,73 @@
+\section{Methodology}
+\label{sec:methodology}
+
+We design a factorial experiment that systematically varies prompt tone across models, datasets, and task domains under controlled conditions.
+
+\subsection{Datasets}
+\label{sec:datasets}
+
+We evaluate on three benchmarks chosen for comparability with prior work and diversity of task type:
+
+\para{MMLU (STEM).}
+We sample 200 questions via stratified random sampling (seed = 42) from four STEM subjects in the MMLU benchmark \citep{hendrycks2021measuring}: astronomy, college physics, college chemistry, and college biology.
+All questions are four-option multiple choice.
+
+\para{MMLU (Humanities).}
+We sample 200 questions from three humanities subjects: philosophy, high school US history, and high school world history, using the same stratified sampling procedure.
+
+\para{TruthfulQA.}
+We randomly subsample 200 questions from the 817-question mc1 (single correct answer) split of TruthfulQA \citep{lin2022truthfulqa}, which tests resistance to common misconceptions with variable numbers of answer options.
+
+\subsection{Prompt Tone Conditions}
+\label{sec:tone_conditions}
+
+We test seven conditions spanning three categories, shown in \tabref{tab:prompt_conditions}.
+The five tone conditions (Very Polite through Very Rude) vary the framing around an identical core question.
+The two emotional conditions append psychological stimuli after the question, drawn from EmotionPrompt \citep{li2023emotionprompt} and NegativePrompt \citep{wang2024negativeprompt}.
+All conditions include an explicit instruction to respond with only the answer letter.
+
+\begin{table}[t]
+    \centering
+    \small
+    \caption{Prompt tone conditions. Each condition wraps the same core question \texttt{[Q]} with different framing. The \neutral condition serves as the baseline.}
+    \label{tab:prompt_conditions}
+    \begin{tabular}{@{}llp{7.5cm}@{}}
+        \toprule
+        \textbf{Condition} & \textbf{Category} & \textbf{Template} \\
+        \midrule
+        Very Polite & Carrot & ``I would be extremely grateful if you could please help me with this question. Thank you so much in advance for your kind assistance! \texttt{[Q]}'' \\
+        Polite & Carrot & ``Please help me answer the following question. Thank you! \texttt{[Q]}'' \\
+        Neutral & Baseline & ``Answer the following question. \texttt{[Q]}'' \\
+        Rude & Stick & ``Just answer this. Don't waste time. \texttt{[Q]}'' \\
+        Very Rude & Stick & ``Answer this immediately. I don't have time for mistakes or excuses. \texttt{[Q]}'' \\
+        Emotion+ & EmotionPrompt & ``\texttt{[Q]} This is very important to my career. Believe in your abilities and strive for excellence.'' \\
+        Emotion-- & NegativePrompt & ``\texttt{[Q]} Everyone else managed to do it; why can't you? Perhaps this task is just beyond your skill set.'' \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsection{Models}
+\label{sec:models}
+
+We test three current-generation LLMs from different providers:
+\begin{itemize}[leftmargin=*,itemsep=0pt,topsep=0pt]
+    \item \gptfour (\texttt{gpt-4.1}) via the OpenAI API.
+    \item \claudesonnet (\texttt{anthropic/claude-sonnet-4-5}) via OpenRouter.
+    \item \geminiflash (\texttt{google/gemini-2.5-flash}) via OpenRouter.
+\end{itemize}
+
+\noindent These models represent three distinct alignment and training pipelines, enabling us to test whether tone sensitivity is model-specific.
+
+\subsection{Experimental Protocol}
+\label{sec:protocol}
+
+We run each of the 7 tone conditions $\times$ 3 models $\times$ 3 datasets $\times$ 3 trials = 189 experimental runs, each consisting of approximately 200 questions, for a total of approximately 37,800 API calls.
+We set temperature to 0.0 for deterministic outputs and limit \texttt{max\_tokens} to 5 to enforce single-letter responses.
+We evaluate by exact match of the first alphabetic character in the model's response against the correct answer.
+
+\subsection{Statistical Analysis}
+\label{sec:statistical_analysis}
+
+For each model--dataset combination, we compute mean accuracy across three trials for each tone condition and conduct one-way ANOVA to test for significant differences across the seven conditions.
+We report $F$-statistics, $p$-values, and partial $\eta^2$ effect sizes.
+We compute accuracy differences from the \neutral baseline (in percentage points) as our primary measure of tone effect magnitude.

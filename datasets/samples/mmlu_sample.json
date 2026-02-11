@@ -1,0 +1,112 @@
+[
+  {
+    "question": "Find the degree for the given field extension Q(sqrt(2), sqrt(3), sqrt(18)) over Q.",
+    "subject": "abstract_algebra",
+    "choices": [
+      "0",
+      "4",
+      "2",
+      "6"
+    ],
+    "answer": "B"
+  },
+  {
+    "question": "Let p = (1, 2, 5, 4)(2, 3) in S_5 . Find the index of <p> in S_5.",
+    "subject": "abstract_algebra",
+    "choices": [
+      "8",
+      "2",
+      "24",
+      "120"
+    ],
+    "answer": "C"
+  },
+  {
+    "question": "A lesion causing compression of the facial nerve at the stylomastoid foramen will cause ipsilateral",
+    "subject": "anatomy",
+    "choices": [
+      "paralysis of the facial muscles.",
+      "paralysis of the facial muscles and loss of taste.",
+      "paralysis of the facial muscles, loss of taste and lacrimation.",
+      "paralysis of the facial muscles, loss of taste, lacrimation and decreased salivation."
+    ],
+    "answer": "A"
+  },
+  {
+    "question": "A \"dished face\" profile is often associated with",
+    "subject": "anatomy",
+    "choices": [
+      "a protruding mandible due to reactivation of the condylar cartilage by acromegaly.",
+      "a recessive maxilla due to failure of elongation of the cranial base.",
+      "an enlarged frontal bone due to hydrocephaly.",
+      "defective development of the maxillary air sinus."
+    ],
+    "answer": "B"
+  },
+  {
+    "question": "What is true for a type-Ia (\"type one-a\") supernova?",
+    "subject": "astronomy",
+    "choices": [
+      "This type occurs in binary systems.",
+      "This type occurs in young galaxies.",
+      "This type produces gamma-ray bursts.",
+      "This type produces high amounts of X-rays."
+    ],
+    "answer": "A"
+  },
+  {
+    "question": "If you know both the actual brightness of an object and its apparent brightness from your location then with no other information you can estimate:",
+    "subject": "astronomy",
+    "choices": [
+      "Its speed relative to you",
+      "Its composition",
+      "Its size",
+      "Its distance from you"
+    ],
+    "answer": "D"
+  },
+  {
+    "question": "_______ such as bitcoin are becoming increasingly mainstream and have a whole host of associated ethical implications, for example, they are______ and more ______. However, they have also been used to engage in _______.",
+    "subject": "business_ethics",
+    "choices": [
+      "Cryptocurrencies, Expensive, Secure, Financial Crime",
+      "Traditional currency, Cheap, Unsecure, Charitable giving",
+      "Cryptocurrencies, Cheap, Secure, Financial crime",
+      "Traditional currency, Expensive, Unsecure, Charitable giving"
+    ],
+    "answer": "C"
+  },
+  {
+    "question": "Typical advertising regulatory bodies suggest, for example that adverts must not: encourage _________, cause unnecessary ________ or _____, and must not cause _______ offence.",
+    "subject": "business_ethics",
+    "choices": [
+      "Unsafe practices, Wants, Fear, Trivial",
+      "Unsafe practices, Distress, Fear, Serious",
+      "Safe practices, Wants, Jealousy, Trivial",
+      "Safe practices, Distress, Jealousy, Serious"
+    ],
+    "answer": "B"
+  },
+  {
+    "question": "What size of cannula would you use in a patient who needed a rapid blood transfusion (as of 2020 medical knowledge)?",
+    "subject": "clinical_knowledge",
+    "choices": [
+      "18 gauge.",
+      "20 gauge.",
+      "22 gauge.",
+      "24 gauge."
+    ],
+    "answer": "A"
+  },
+  {
+    "question": "The key attribute in successful marathon running is:",
+    "subject": "clinical_knowledge",
+    "choices": [
+      "strength.",
+      "power.",
+      "stride length.",
+      "stamina."
+    ],
+    "answer": "D"
+  }
+]

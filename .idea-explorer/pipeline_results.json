@@ -1,0 +1,27 @@
+{
+  "success": true,
+  "stages": {
+    "resource_finder": {
+      "success": true,
+      "completion_marker": "/workspaces/carrot-or-stick-nlp-1462-claude/.resource_finder_complete",
+      "outputs": {
+        "literature_review": "/workspaces/carrot-or-stick-nlp-1462-claude/literature_review.md",
+        "resources_catalog": "/workspaces/carrot-or-stick-nlp-1462-claude/resources.md",
+        "papers_dir": "/workspaces/carrot-or-stick-nlp-1462-claude/papers",
+        "datasets_dir": "/workspaces/carrot-or-stick-nlp-1462-claude/datasets",
+        "code_dir": "/workspaces/carrot-or-stick-nlp-1462-claude/code"
+      },
+      "log_file": "/workspaces/carrot-or-stick-nlp-1462-claude/logs/resource_finder_claude.log",
+      "transcript_file": "/workspaces/carrot-or-stick-nlp-1462-claude/logs/resource_finder_claude_transcript.jsonl",
+      "elapsed_time": 1108.620234489441
+    },
+    "experiment_runner": {
+      "success": true,
+      "return_code": 0,
+      "elapsed_time": 3095.3914618492126,
+      "log_file": "/workspaces/carrot-or-stick-nlp-1462-claude/logs/execution_claude.log",
+      "transcript_file": "/workspaces/carrot-or-stick-nlp-1462-claude/logs/execution_claude_transcript.jsonl"
+    }
+  },
+  "work_dir": "/workspaces/carrot-or-stick-nlp-1462-claude"
+}

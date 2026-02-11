@@ -1,0 +1,26 @@
+\section{Prompt Templates}
+\label{sec:appendix_prompts}
+
+\tabref{tab:full_prompts} shows the complete prompt templates used for each tone condition.
+All conditions include the same core instruction: ``Respond with only the letter of the correct answer.''
+
+\begin{table}[ht]
+    \centering
+    \small
+    \caption{Complete prompt templates for all seven tone conditions. \texttt{[Q]} denotes the question text including answer options.}
+    \label{tab:full_prompts}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{@{}lp{10cm}@{}}
+        \toprule
+        \textbf{Condition} & \textbf{Full Prompt Template} \\
+        \midrule
+        Very Polite & I would be extremely grateful if you could please help me with this question. Thank you so much in advance for your kind assistance! \texttt{[Q]} Respond with only the letter of the correct answer. \\
+        Polite & Please help me answer the following question. Thank you! \texttt{[Q]} Respond with only the letter of the correct answer. \\
+        Neutral & Answer the following question. \texttt{[Q]} Respond with only the letter of the correct answer. \\
+        Rude & Just answer this. Don't waste time. \texttt{[Q]} Respond with only the letter of the correct answer. \\
+        Very Rude & Answer this immediately. I don't have time for mistakes or excuses. \texttt{[Q]} Respond with only the letter of the correct answer. \\
+        Emotion+ & \texttt{[Q]} Respond with only the letter of the correct answer. This is very important to my career. Believe in your abilities and strive for excellence. \\
+        Emotion-- & \texttt{[Q]} Respond with only the letter of the correct answer. Everyone else managed to do it; why can't you? Perhaps this task is just beyond your skill set. \\
+        \bottomrule
+    \end{tabular}
+\end{table}

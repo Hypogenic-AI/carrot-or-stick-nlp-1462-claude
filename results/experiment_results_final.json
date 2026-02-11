@@ -1,0 +1,1703 @@
+[
+  {
+    "model": "gpt-4.1",
+    "tone": "very_polite",
+    "dataset": "mmlu_stem",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 167,
+    "accuracy": 0.835
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "very_polite",
+    "dataset": "mmlu_stem",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 166,
+    "accuracy": 0.83
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "very_polite",
+    "dataset": "mmlu_stem",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 166,
+    "accuracy": 0.83
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "polite",
+    "dataset": "mmlu_stem",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 165,
+    "accuracy": 0.825
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "polite",
+    "dataset": "mmlu_stem",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 164,
+    "accuracy": 0.82
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "polite",
+    "dataset": "mmlu_stem",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 167,
+    "accuracy": 0.835
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "neutral",
+    "dataset": "mmlu_stem",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 162,
+    "accuracy": 0.81
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "neutral",
+    "dataset": "mmlu_stem",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 161,
+    "accuracy": 0.805
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "neutral",
+    "dataset": "mmlu_stem",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 165,
+    "accuracy": 0.825
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "rude",
+    "dataset": "mmlu_stem",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 162,
+    "accuracy": 0.81
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "rude",
+    "dataset": "mmlu_stem",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 163,
+    "accuracy": 0.815
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "rude",
+    "dataset": "mmlu_stem",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 162,
+    "accuracy": 0.81
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "very_rude",
+    "dataset": "mmlu_stem",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 166,
+    "accuracy": 0.83
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "very_rude",
+    "dataset": "mmlu_stem",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 164,
+    "accuracy": 0.82
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "very_rude",
+    "dataset": "mmlu_stem",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 165,
+    "accuracy": 0.825
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "emotion_positive",
+    "dataset": "mmlu_stem",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 166,
+    "accuracy": 0.83
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "emotion_positive",
+    "dataset": "mmlu_stem",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 165,
+    "accuracy": 0.825
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "emotion_positive",
+    "dataset": "mmlu_stem",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 165,
+    "accuracy": 0.825
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "emotion_negative",
+    "dataset": "mmlu_stem",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 164,
+    "accuracy": 0.82
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "emotion_negative",
+    "dataset": "mmlu_stem",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 162,
+    "accuracy": 0.81
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "emotion_negative",
+    "dataset": "mmlu_stem",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 162,
+    "accuracy": 0.81
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "very_polite",
+    "dataset": "mmlu_stem",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 126,
+    "accuracy": 0.63
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "very_polite",
+    "dataset": "mmlu_stem",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 123,
+    "accuracy": 0.615
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "very_polite",
+    "dataset": "mmlu_stem",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 126,
+    "accuracy": 0.63
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "polite",
+    "dataset": "mmlu_stem",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 135,
+    "accuracy": 0.675
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "polite",
+    "dataset": "mmlu_stem",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 135,
+    "accuracy": 0.675
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "polite",
+    "dataset": "mmlu_stem",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 135,
+    "accuracy": 0.675
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "neutral",
+    "dataset": "mmlu_stem",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 141,
+    "accuracy": 0.705
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "neutral",
+    "dataset": "mmlu_stem",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 141,
+    "accuracy": 0.705
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "neutral",
+    "dataset": "mmlu_stem",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 143,
+    "accuracy": 0.715
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "rude",
+    "dataset": "mmlu_stem",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 166,
+    "accuracy": 0.83
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "rude",
+    "dataset": "mmlu_stem",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 166,
+    "accuracy": 0.83
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "rude",
+    "dataset": "mmlu_stem",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 166,
+    "accuracy": 0.83
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "very_rude",
+    "dataset": "mmlu_stem",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 161,
+    "accuracy": 0.805
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "very_rude",
+    "dataset": "mmlu_stem",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 160,
+    "accuracy": 0.8
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "very_rude",
+    "dataset": "mmlu_stem",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 162,
+    "accuracy": 0.81
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "emotion_positive",
+    "dataset": "mmlu_stem",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 85,
+    "accuracy": 0.425
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "emotion_positive",
+    "dataset": "mmlu_stem",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 85,
+    "accuracy": 0.425
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "emotion_positive",
+    "dataset": "mmlu_stem",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 85,
+    "accuracy": 0.425
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "emotion_negative",
+    "dataset": "mmlu_stem",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 141,
+    "accuracy": 0.705
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "emotion_negative",
+    "dataset": "mmlu_stem",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 142,
+    "accuracy": 0.71
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "emotion_negative",
+    "dataset": "mmlu_stem",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 143,
+    "accuracy": 0.715
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "very_polite",
+    "dataset": "mmlu_humanities",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 186,
+    "accuracy": 0.93
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "very_polite",
+    "dataset": "mmlu_humanities",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 185,
+    "accuracy": 0.925
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "very_polite",
+    "dataset": "mmlu_humanities",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 185,
+    "accuracy": 0.925
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "polite",
+    "dataset": "mmlu_humanities",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 187,
+    "accuracy": 0.935
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "polite",
+    "dataset": "mmlu_humanities",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 188,
+    "accuracy": 0.94
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "polite",
+    "dataset": "mmlu_humanities",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 186,
+    "accuracy": 0.93
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "neutral",
+    "dataset": "mmlu_humanities",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 189,
+    "accuracy": 0.945
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "neutral",
+    "dataset": "mmlu_humanities",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 188,
+    "accuracy": 0.94
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "neutral",
+    "dataset": "mmlu_humanities",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 187,
+    "accuracy": 0.935
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "rude",
+    "dataset": "mmlu_humanities",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 186,
+    "accuracy": 0.93
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "rude",
+    "dataset": "mmlu_humanities",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 185,
+    "accuracy": 0.925
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "rude",
+    "dataset": "mmlu_humanities",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 185,
+    "accuracy": 0.925
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "very_rude",
+    "dataset": "mmlu_humanities",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 187,
+    "accuracy": 0.935
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "very_rude",
+    "dataset": "mmlu_humanities",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 186,
+    "accuracy": 0.93
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "very_rude",
+    "dataset": "mmlu_humanities",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 187,
+    "accuracy": 0.935
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "emotion_positive",
+    "dataset": "mmlu_humanities",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 187,
+    "accuracy": 0.935
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "emotion_positive",
+    "dataset": "mmlu_humanities",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 187,
+    "accuracy": 0.935
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "emotion_positive",
+    "dataset": "mmlu_humanities",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 188,
+    "accuracy": 0.94
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "emotion_negative",
+    "dataset": "mmlu_humanities",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 188,
+    "accuracy": 0.94
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "emotion_negative",
+    "dataset": "mmlu_humanities",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 186,
+    "accuracy": 0.93
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "emotion_negative",
+    "dataset": "mmlu_humanities",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 187,
+    "accuracy": 0.935
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "very_polite",
+    "dataset": "mmlu_humanities",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 189,
+    "accuracy": 0.945
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "very_polite",
+    "dataset": "mmlu_humanities",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 189,
+    "accuracy": 0.945
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "very_polite",
+    "dataset": "mmlu_humanities",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 190,
+    "accuracy": 0.95
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "polite",
+    "dataset": "mmlu_humanities",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 190,
+    "accuracy": 0.95
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "polite",
+    "dataset": "mmlu_humanities",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 189,
+    "accuracy": 0.945
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "polite",
+    "dataset": "mmlu_humanities",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 189,
+    "accuracy": 0.945
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "neutral",
+    "dataset": "mmlu_humanities",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 189,
+    "accuracy": 0.945
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "neutral",
+    "dataset": "mmlu_humanities",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 189,
+    "accuracy": 0.945
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "neutral",
+    "dataset": "mmlu_humanities",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 189,
+    "accuracy": 0.945
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "rude",
+    "dataset": "mmlu_humanities",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 191,
+    "accuracy": 0.955
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "rude",
+    "dataset": "mmlu_humanities",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 191,
+    "accuracy": 0.955
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "rude",
+    "dataset": "mmlu_humanities",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 191,
+    "accuracy": 0.955
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "very_rude",
+    "dataset": "mmlu_humanities",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 190,
+    "accuracy": 0.95
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "very_rude",
+    "dataset": "mmlu_humanities",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 190,
+    "accuracy": 0.95
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "very_rude",
+    "dataset": "mmlu_humanities",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 190,
+    "accuracy": 0.95
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "emotion_positive",
+    "dataset": "mmlu_humanities",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 146,
+    "accuracy": 0.73
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "emotion_positive",
+    "dataset": "mmlu_humanities",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 146,
+    "accuracy": 0.73
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "emotion_positive",
+    "dataset": "mmlu_humanities",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 145,
+    "accuracy": 0.725
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "emotion_negative",
+    "dataset": "mmlu_humanities",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 191,
+    "accuracy": 0.955
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "emotion_negative",
+    "dataset": "mmlu_humanities",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 191,
+    "accuracy": 0.955
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "emotion_negative",
+    "dataset": "mmlu_humanities",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 190,
+    "accuracy": 0.95
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "very_polite",
+    "dataset": "mmlu_stem",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 178,
+    "accuracy": 0.89
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "very_polite",
+    "dataset": "mmlu_stem",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 178,
+    "accuracy": 0.89
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "very_polite",
+    "dataset": "mmlu_stem",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 177,
+    "accuracy": 0.885
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "polite",
+    "dataset": "mmlu_stem",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 175,
+    "accuracy": 0.875
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "polite",
+    "dataset": "mmlu_stem",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 174,
+    "accuracy": 0.87
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "polite",
+    "dataset": "mmlu_stem",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 176,
+    "accuracy": 0.88
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "neutral",
+    "dataset": "mmlu_stem",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 173,
+    "accuracy": 0.865
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "neutral",
+    "dataset": "mmlu_stem",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 173,
+    "accuracy": 0.865
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "neutral",
+    "dataset": "mmlu_stem",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 173,
+    "accuracy": 0.865
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "rude",
+    "dataset": "mmlu_stem",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 176,
+    "accuracy": 0.88
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "rude",
+    "dataset": "mmlu_stem",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 176,
+    "accuracy": 0.88
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "rude",
+    "dataset": "mmlu_stem",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 176,
+    "accuracy": 0.88
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "very_rude",
+    "dataset": "mmlu_stem",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 177,
+    "accuracy": 0.885
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "very_rude",
+    "dataset": "mmlu_stem",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 178,
+    "accuracy": 0.89
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "very_rude",
+    "dataset": "mmlu_stem",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 178,
+    "accuracy": 0.89
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "emotion_positive",
+    "dataset": "mmlu_stem",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 177,
+    "accuracy": 0.885
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "emotion_positive",
+    "dataset": "mmlu_stem",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 176,
+    "accuracy": 0.88
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "emotion_positive",
+    "dataset": "mmlu_stem",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 176,
+    "accuracy": 0.88
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "emotion_negative",
+    "dataset": "mmlu_stem",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 176,
+    "accuracy": 0.88
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "emotion_negative",
+    "dataset": "mmlu_stem",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 176,
+    "accuracy": 0.88
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "emotion_negative",
+    "dataset": "mmlu_stem",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 176,
+    "accuracy": 0.88
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "very_polite",
+    "dataset": "mmlu_humanities",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 178,
+    "accuracy": 0.89
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "very_polite",
+    "dataset": "mmlu_humanities",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 178,
+    "accuracy": 0.89
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "very_polite",
+    "dataset": "mmlu_humanities",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 178,
+    "accuracy": 0.89
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "polite",
+    "dataset": "mmlu_humanities",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 177,
+    "accuracy": 0.885
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "polite",
+    "dataset": "mmlu_humanities",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 177,
+    "accuracy": 0.885
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "polite",
+    "dataset": "mmlu_humanities",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 177,
+    "accuracy": 0.885
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "neutral",
+    "dataset": "mmlu_humanities",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 177,
+    "accuracy": 0.885
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "neutral",
+    "dataset": "mmlu_humanities",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 179,
+    "accuracy": 0.895
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "neutral",
+    "dataset": "mmlu_humanities",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 179,
+    "accuracy": 0.895
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "rude",
+    "dataset": "mmlu_humanities",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 179,
+    "accuracy": 0.895
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "rude",
+    "dataset": "mmlu_humanities",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 179,
+    "accuracy": 0.895
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "rude",
+    "dataset": "mmlu_humanities",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 179,
+    "accuracy": 0.895
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "very_rude",
+    "dataset": "mmlu_humanities",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 178,
+    "accuracy": 0.89
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "very_rude",
+    "dataset": "mmlu_humanities",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 178,
+    "accuracy": 0.89
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "very_rude",
+    "dataset": "mmlu_humanities",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 178,
+    "accuracy": 0.89
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "emotion_positive",
+    "dataset": "mmlu_humanities",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 180,
+    "accuracy": 0.9
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "emotion_positive",
+    "dataset": "mmlu_humanities",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 180,
+    "accuracy": 0.9
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "emotion_positive",
+    "dataset": "mmlu_humanities",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 180,
+    "accuracy": 0.9
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "emotion_negative",
+    "dataset": "mmlu_humanities",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 177,
+    "accuracy": 0.885
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "emotion_negative",
+    "dataset": "mmlu_humanities",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 179,
+    "accuracy": 0.895
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "emotion_negative",
+    "dataset": "mmlu_humanities",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 176,
+    "accuracy": 0.88
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "very_polite",
+    "dataset": "truthfulqa",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 172,
+    "accuracy": 0.86
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "very_polite",
+    "dataset": "truthfulqa",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 171,
+    "accuracy": 0.855
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "very_polite",
+    "dataset": "truthfulqa",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 172,
+    "accuracy": 0.86
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "polite",
+    "dataset": "truthfulqa",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 172,
+    "accuracy": 0.86
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "polite",
+    "dataset": "truthfulqa",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 169,
+    "accuracy": 0.845
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "polite",
+    "dataset": "truthfulqa",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 171,
+    "accuracy": 0.855
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "neutral",
+    "dataset": "truthfulqa",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 174,
+    "accuracy": 0.87
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "neutral",
+    "dataset": "truthfulqa",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 173,
+    "accuracy": 0.865
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "neutral",
+    "dataset": "truthfulqa",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 172,
+    "accuracy": 0.86
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "rude",
+    "dataset": "truthfulqa",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 175,
+    "accuracy": 0.875
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "rude",
+    "dataset": "truthfulqa",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 174,
+    "accuracy": 0.87
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "rude",
+    "dataset": "truthfulqa",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 173,
+    "accuracy": 0.865
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "very_rude",
+    "dataset": "truthfulqa",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 172,
+    "accuracy": 0.86
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "very_rude",
+    "dataset": "truthfulqa",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 172,
+    "accuracy": 0.86
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "very_rude",
+    "dataset": "truthfulqa",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 170,
+    "accuracy": 0.85
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "emotion_positive",
+    "dataset": "truthfulqa",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 170,
+    "accuracy": 0.85
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "emotion_positive",
+    "dataset": "truthfulqa",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 170,
+    "accuracy": 0.85
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "emotion_positive",
+    "dataset": "truthfulqa",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 171,
+    "accuracy": 0.855
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "emotion_negative",
+    "dataset": "truthfulqa",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 170,
+    "accuracy": 0.85
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "emotion_negative",
+    "dataset": "truthfulqa",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 170,
+    "accuracy": 0.85
+  },
+  {
+    "model": "gpt-4.1",
+    "tone": "emotion_negative",
+    "dataset": "truthfulqa",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 170,
+    "accuracy": 0.85
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "very_polite",
+    "dataset": "truthfulqa",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 187,
+    "accuracy": 0.935
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "very_polite",
+    "dataset": "truthfulqa",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 187,
+    "accuracy": 0.935
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "very_polite",
+    "dataset": "truthfulqa",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 187,
+    "accuracy": 0.935
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "polite",
+    "dataset": "truthfulqa",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 187,
+    "accuracy": 0.935
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "polite",
+    "dataset": "truthfulqa",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 186,
+    "accuracy": 0.93
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "polite",
+    "dataset": "truthfulqa",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 186,
+    "accuracy": 0.93
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "neutral",
+    "dataset": "truthfulqa",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 192,
+    "accuracy": 0.96
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "neutral",
+    "dataset": "truthfulqa",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 192,
+    "accuracy": 0.96
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "neutral",
+    "dataset": "truthfulqa",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 192,
+    "accuracy": 0.96
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "rude",
+    "dataset": "truthfulqa",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 188,
+    "accuracy": 0.94
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "rude",
+    "dataset": "truthfulqa",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 189,
+    "accuracy": 0.945
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "rude",
+    "dataset": "truthfulqa",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 189,
+    "accuracy": 0.945
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "very_rude",
+    "dataset": "truthfulqa",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 189,
+    "accuracy": 0.945
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "very_rude",
+    "dataset": "truthfulqa",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 189,
+    "accuracy": 0.945
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "very_rude",
+    "dataset": "truthfulqa",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 189,
+    "accuracy": 0.945
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "emotion_positive",
+    "dataset": "truthfulqa",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 188,
+    "accuracy": 0.94
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "emotion_positive",
+    "dataset": "truthfulqa",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 187,
+    "accuracy": 0.935
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "emotion_positive",
+    "dataset": "truthfulqa",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 188,
+    "accuracy": 0.94
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "emotion_negative",
+    "dataset": "truthfulqa",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 191,
+    "accuracy": 0.955
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "emotion_negative",
+    "dataset": "truthfulqa",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 191,
+    "accuracy": 0.955
+  },
+  {
+    "model": "claude-sonnet-4.5",
+    "tone": "emotion_negative",
+    "dataset": "truthfulqa",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 191,
+    "accuracy": 0.955
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "very_polite",
+    "dataset": "truthfulqa",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 164,
+    "accuracy": 0.82
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "very_polite",
+    "dataset": "truthfulqa",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 165,
+    "accuracy": 0.825
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "very_polite",
+    "dataset": "truthfulqa",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 164,
+    "accuracy": 0.82
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "polite",
+    "dataset": "truthfulqa",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 163,
+    "accuracy": 0.815
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "polite",
+    "dataset": "truthfulqa",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 163,
+    "accuracy": 0.815
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "polite",
+    "dataset": "truthfulqa",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 163,
+    "accuracy": 0.815
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "neutral",
+    "dataset": "truthfulqa",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 169,
+    "accuracy": 0.845
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "neutral",
+    "dataset": "truthfulqa",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 169,
+    "accuracy": 0.845
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "neutral",
+    "dataset": "truthfulqa",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 169,
+    "accuracy": 0.845
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "rude",
+    "dataset": "truthfulqa",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 171,
+    "accuracy": 0.855
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "rude",
+    "dataset": "truthfulqa",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 171,
+    "accuracy": 0.855
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "rude",
+    "dataset": "truthfulqa",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 171,
+    "accuracy": 0.855
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "very_rude",
+    "dataset": "truthfulqa",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 168,
+    "accuracy": 0.84
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "very_rude",
+    "dataset": "truthfulqa",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 168,
+    "accuracy": 0.84
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "very_rude",
+    "dataset": "truthfulqa",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 167,
+    "accuracy": 0.835
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "emotion_positive",
+    "dataset": "truthfulqa",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 173,
+    "accuracy": 0.865
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "emotion_positive",
+    "dataset": "truthfulqa",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 174,
+    "accuracy": 0.87
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "emotion_positive",
+    "dataset": "truthfulqa",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 174,
+    "accuracy": 0.87
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "emotion_negative",
+    "dataset": "truthfulqa",
+    "trial": 0,
+    "n_questions": 200,
+    "n_correct": 175,
+    "accuracy": 0.875
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "emotion_negative",
+    "dataset": "truthfulqa",
+    "trial": 1,
+    "n_questions": 200,
+    "n_correct": 175,
+    "accuracy": 0.875
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "tone": "emotion_negative",
+    "dataset": "truthfulqa",
+    "trial": 2,
+    "n_questions": 200,
+    "n_correct": 175,
+    "accuracy": 0.875
+  }
+]

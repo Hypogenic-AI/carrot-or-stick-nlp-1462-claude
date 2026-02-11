@@ -1,0 +1,10 @@
+# Exclude large dataset files (Arrow/Parquet format from HuggingFace datasets library)
+mmlu/
+truthfulqa/
+
+# HuggingFace cache
+.cache/
+
+# Keep samples and documentation
+!samples/
+!README.md

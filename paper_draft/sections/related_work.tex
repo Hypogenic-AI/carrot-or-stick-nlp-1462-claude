@@ -1,0 +1,27 @@
+\section{Related Work}
+\label{sec:related_work}
+
+We organize prior work into three threads: politeness and tone studies, emotional stimulus approaches, and broader prompt sensitivity research.
+
+\para{Politeness and tone in LLM prompting.}
+\citet{yin2024should} conducted the first cross-lingual study of prompt politeness effects, testing eight politeness levels across English, Chinese, and Japanese on GPT-3.5, GPT-4, and Llama2-70B.
+They found that impolite prompts generally hurt performance, though the optimal politeness level varied by language: English peaked at the highest politeness level while Japanese peaked at moderate levels.
+Notably, they found that RLHF-trained models showed greater sensitivity to politeness than base models.
+\citet{dobariya2025mind} reached the opposite conclusion on GPT-4o, reporting that rude prompts yielded the highest accuracy (84.8\%) compared to very polite prompts (80.8\%) on a 50-question multiple-choice benchmark.
+Most recently, \citet{cai2025does} tested three tone variants on GPT-4o mini, Gemini 2.0 Flash, and Llama 4 Scout using the MMMLU benchmark with up to 1,446 questions per domain.
+They found that only 4 of 36 pairwise comparisons reached statistical significance, and that Gemini was essentially tone-insensitive.
+They attributed the discrepancy with \citet{dobariya2025mind} to dataset scale: effects visible on 50 questions disappeared at larger scales.
+Unlike these studies, which each test one to three models under different conditions, we evaluate all tone variants under identical controlled conditions across three model families, enabling direct comparison.
+
+\para{Emotional stimuli in prompting.}
+\citet{li2023emotionprompt} proposed appending positive emotional phrases (e.g., ``This is very important to my career'') to prompts, drawing on self-monitoring theory and social cognitive theory from psychology.
+They reported improvements of 8\% on Instruction Induction and 115\% on BIG-Bench across six LLMs.
+\citet{wang2024negativeprompt} extended this approach with negative emotional stimuli (e.g., ``Everyone else managed to do it; why can't you?''), grounded in cognitive dissonance and social comparison theories.
+They found 12.89\% improvement on Instruction Induction---higher than EmotionPrompt---and significant gains on TruthfulQA.
+However, neither study tested positive and negative stimuli head-to-head under identical conditions, and both used older model generations (GPT-3.5, GPT-4, Llama 2).
+We include both types of stimuli in our unified comparison and test on 2025-era models.
+
+\para{Prompt sensitivity and engineering principles.}
+\citet{bsharat2023principled} identified 26 prompting principles through systematic evaluation on LLaMA and GPT models, with Principle 1 being ``No need to be polite with LLMs,'' reporting approximately 5\% improvement from removing courtesy phrases.
+\citet{gandhi2025prompt} examined prompt sentiment effects across five LLMs and six application domains, finding that negative prompts reduced factual accuracy by approximately 8.4\% and that effects were strongest in creative writing and weakest in technical domains.
+This domain dependence motivates our stratified evaluation across STEM and Humanities benchmarks.

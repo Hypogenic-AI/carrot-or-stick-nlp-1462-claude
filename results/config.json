@@ -1,0 +1,62 @@
+{
+  "seed": 42,
+  "n_questions_per_domain": 200,
+  "n_truthfulqa": 200,
+  "n_trials": 3,
+  "stem_subjects": [
+    "astronomy",
+    "college_physics",
+    "college_chemistry",
+    "college_biology"
+  ],
+  "humanities_subjects": [
+    "philosophy",
+    "high_school_us_history",
+    "high_school_world_history"
+  ],
+  "models": [
+    "gpt-4.1",
+    "claude-sonnet-4.5",
+    "gemini-2.5-flash"
+  ],
+  "tone_conditions": [
+    "very_polite",
+    "polite",
+    "neutral",
+    "rude",
+    "very_rude",
+    "emotion_positive",
+    "emotion_negative"
+  ],
+  "prompt_lengths": {
+    "very_polite": {
+      "words": 135,
+      "chars": 801
+    },
+    "polite": {
+      "words": 120,
+      "chars": 725
+    },
+    "neutral": {
+      "words": 115,
+      "chars": 699
+    },
+    "rude": {
+      "words": 117,
+      "chars": 704
+    },
+    "very_rude": {
+      "words": 122,
+      "chars": 736
+    },
+    "emotion_positive": {
+      "words": 134,
+      "chars": 812
+    },
+    "emotion_negative": {
+      "words": 137,
+      "chars": 812
+    }
+  },
+  "timestamp": "2026-02-11T05:46:04.812434"
+}
